@@ -1,45 +1,11 @@
 @extends('templates.master')
 
 @section('contenido-principal')
-
 <body style="background-color: #e9e5f3;">
     <div class="container-fluid d-flex flex-column justify-content-lg-center align-items-center">
         <div class="row">
             <div class="col-12 d-flex justify-content-center py-4">
                 <h3>Listado de productos en bodega</h3>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-lg-2  py-1">
-                    <div class="mb-3 text-white">
-                        <div class="card">
-                            <div class="card-body">
-                                <form method="POST" action="{{route('bodeguero.filtrar')}}">
-                                    @method('POST')
-                                    @csrf
-                                    <div class="mb-3">
-                                        <label for="categoria" class="form-label">Filtrar productos</label>
-                                    </div>
-                                    <div class="mb-3">
-                                        <select id="categoria" name="categoria" class="form-control">
-                                            @foreach($categorias as $categoria)
-                                            <option value="{{$categoria->id_categoria}}">{{$categoria->nombre}}
-                                            </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col d-flex text-end">
-                                            <div class="mb-3 px-0 ">
-                                                <button class="btn btn-primary d-flex flex-column justify-content-center"type="submit">Filtrar</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
         <div class="container">
