@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BodegueroController;
+use App\Http\Controllers\UsuariosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,7 +14,10 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/',[UsuariosController::class,'login'])->name('login.login');
+Route::get('/inicio',[BodegueroController::class,'inicio'])->name('inicio.bodeguero');
+Route::get('/inicio/productos',[BodegueroController::class,'ver_productos'])->name('bodeguero.productos');
+Route::get('/inicio/agregar',[BodegueroController::class,'agregar_productos'])->name('bodeguero.agregar');
+Route::post('/inicio/filtrar',[BodegueroController::class,'filtrar_productos'])->name('bodeguero.filtrar');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
