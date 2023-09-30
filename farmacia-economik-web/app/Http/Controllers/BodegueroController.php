@@ -13,8 +13,10 @@ class BodegueroController extends Controller
     }
 
     public function ver_productos(){
+        //Todas las categorias
         $categorias = Categoria::all();
-        $productos = Producto::all();
+        //todos los productos que tengan categoria
+        $productos = Producto::with('Categoria')->get();
         return view('bodeguero.productos', compact(['productos','categorias']));
     }
 
@@ -23,10 +25,13 @@ class BodegueroController extends Controller
     }
 
     public function filtrar_productos(Request $request){
+        //buscar categoria que necesito
         $categoria = Categoria::find($request)->first();
+        //productos que tengan la categoria que necesito
         $productos = Producto::where('id_categoria',$categoria->id_categoria)->get();
-        //dd($productos);
-        return view('bodeguero.productos_filtrados',compact(['categoria','productos']));
+        //guardar el nombre de la categoria 
+        $nombre_categoria = $categoria->nombre;
+        return view('bodeguero.productos_filtrados',compact(['categoria','productos','nombre_categoria']));
     }
 
 }

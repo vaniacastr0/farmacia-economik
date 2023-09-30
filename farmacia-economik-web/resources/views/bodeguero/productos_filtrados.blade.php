@@ -30,7 +30,7 @@
                                                 <td>{{ $producto->id_producto }}</td>
                                                 <td>{{ $producto->nombre_producto }}</td>
                                                 <td>{{ $producto->stock_producto }}</td>
-                                                <td>{{ $producto->id_categoria }}</td>
+                                                <td>{{ $nombre_categoria }}</td>
                                             </tr>
                                         </tbody>
                                         @endforeach

@@ -5,7 +5,7 @@
     <div class="container-fluid d-flex flex-column justify-content-lg-center align-items-center">
         <div class="row">
             <div class="col-12 d-flex justify-content-center py-4">
-                <h3>Ingreso de productos</h3>
+                <h3>Ingreso de producto</h3>
             </div>
         </div>
     </div>
@@ -16,10 +16,6 @@
                 <div class="row bg-white">
                     <div class="col-12  py-3 order-last order-lg-first">
                         <!-- formulario -->
-                        <div class="d-flex justify-content-center align-items-center mb-3 text-center">
-                            <small>Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique voluptas nihil temporibus beatae cum doloremque, laborum sequi, magnam natus officia excepturi nulla maxime velit ipsam, eius sint optio non dolore.
-                            </small>
-                        </div>
                         <div class="card">
                             <div class="card-body">
                                     <div class="row">

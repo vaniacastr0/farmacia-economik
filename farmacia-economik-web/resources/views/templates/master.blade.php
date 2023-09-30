@@ -24,17 +24,26 @@
 
 <body>
     <div class="container-fluid">
+        <div class="row py-3 bg-secondary px-3">
+            <div class="col">
+                <span class="fs-4 text-white">GESTION DE INVENTARIO PARA FARMACIA ECONOMIK</span> <i class="material-symbols-outlined fs-3 text-white">store</i>
+            </div>
+        </div>
         <div class="row">
             <!-- Barra lateral -->
-            <nav class="col-lg-2 col-md-3  d-md-block sidebar bg-white">
+            <nav class="col-lg-2 col-md-3  d-md-block sidebar bg-white border-dark">
                 <div class="position-sticky">
                     <!-- Contenido de la barra lateral -->
                     <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link active text-dark" href="#">
-                                <h3>Farmacia Economik</h3>
-                            </a>
-                        </li>
+                        <div class="user-info">
+                            <div class="image py-3">
+                                <img src="{{ asset('imagenes/user.png') }}" width="60" height="60" alt="User" />
+                            </div>
+                            <div class="info-container">
+                                <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Valentina Gonzalez</div>
+                                <div class="email">Bodeguero</div>
+                            </div>
+                        </div>
                         <li class="nav-item">
                             <a class="nav-link text-dark" href="{{route('bodeguero.productos')}}">
                                 Ver Productos
@@ -61,20 +70,6 @@
             <!-- Contenido principal -->
             <main class="col-lg-10 col-md-9 ms-sm-auto px-md-4 bg-light">
                 <div class="container-fluid">
-                    <!-- barra usuario -->
-                    <div class="container-fluid">
-                        <div class="row bg-ligth text-dark">
-                            <div class="col-8">
-                                Bienvenido <span class="fw-bold">Bodeguero</span> Valenina Gonzalez. 
-                            </div>
-                            <div class="col-3">
-                                Último inicio de sesión: 01/04/2023 a las 18:34 
-                            </div>
-                            <div class="col-1 text-end d-none d-lg-block">
-                                <a href="{{route('login.login')}}" class="text-dark">Cerrar Sesión</a>
-                            </div>
-                        </div>
-                    </div>
                     @yield('contenido-principal')
                 </div>
             </main>

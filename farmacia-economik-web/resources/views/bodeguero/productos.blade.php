@@ -1,3 +1,7 @@
+@php
+$Categorias = [1 =>'Analgesico',2=>'Antiulceroso',3=>'Antidepresivo'];
+@endphp
+
 @extends('templates.master')
 
 @section('contenido-principal')
@@ -19,10 +23,10 @@
                                     @method('POST')
                                     @csrf
                                     <div class="mb-3">
-                                        <label for="categoria" class="form-label">Filtrar productos</label>
+                                        <label for="id_categoria" class="form-label">Filtrar productos</label>
                                     </div>
                                     <div class="mb-3">
-                                        <select id="categoria" name="categoria" class="form-control">
+                                        <select id="id_categoria" name="id_categoria" class="form-control">
                                             @foreach($categorias as $categoria)
                                             <option value="{{$categoria->id_categoria}}">{{$categoria->nombre}}
                                             </option>
@@ -64,7 +68,7 @@
                                                 <td>{{ $producto->id_producto }}</td>
                                                 <td>{{ $producto->nombre_producto }}</td>
                                                 <td>{{ $producto->stock_producto }}</td>
-                                                <td>{{ $producto->id_categoria }}</td>
+                                                <td>{{ $producto->Categoria->nombre }}</td>
                                             </tr>
                                         </tbody>
                                         @endforeach
