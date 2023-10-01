@@ -55,13 +55,23 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" href="#">
+                            <a class="nav-link text-dark" href="{{route('bodeguero.actualizar')}}">
                                 Actualizar Productos
                             </a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link text-dark" href="#">
+                            <a class="nav-link text-dark" href="{{route('bodeguero.eliminar_productos')}}">
                                 Eliminar Productos
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link text-dark" href="{{route('bodeguero.listado_ajustes')}}">
+                                Listado de ajustes
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link text-dark" href="{{route('bodeguero.agregar_nuevoproducto')}}">
+                                Agregar nuevo producto
                             </a>
                         </li>
                     </ul>

@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('detalle_productos', function (Blueprint $table) {
+        Schema::create('detalle_producto', function (Blueprint $table) {
             $table->unsignedBigInteger('id_producto')->primary();
 
             $table->date('fecha_elab');

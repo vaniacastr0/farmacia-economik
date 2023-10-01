@@ -1,7 +1,3 @@
-@php
-$Categorias = [1 =>'Analgesico',2=>'Antiulceroso',3=>'Antidepresivo'];
-@endphp
-
 @extends('templates.master')
 
 @section('contenido-principal')

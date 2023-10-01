@@ -14,14 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('ajustes', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_producto'); // Clave externa a la tabla productos
+            $table->id('id_ajuste'); // Clave externa a la tabla productos
             $table->date('fecha'); // Fecha de creación
             $table->integer('cantidad');
             $table->string('motivo', 255);
+            //FK
+            $table->unsignedBigInteger('id_producto');
             
-            // Definición de la clave primaria compuesta
-            $table->primary(['id_producto', 'fecha']);
-
             // Definición de la clave externa a productos
             $table->foreign('id_producto')->references('id_producto')->on('productos');
         });
