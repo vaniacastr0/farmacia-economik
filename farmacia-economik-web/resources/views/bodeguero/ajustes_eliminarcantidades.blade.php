@@ -33,7 +33,7 @@
                                             <td>{{ $producto->stock_producto }}</td>
                                             <td>{{ $producto->Categoria->nombre }}</td>
                                             <td><div class="col">
-                                                <a href="{{ route('bodeguero.eliminar', $producto->id_producto) }}"
+                                                <a href="{{ route('bodeguero.ajustes_eliminarcantidadesproducto', $producto->id_producto) }}"
                                                     class="btn btn-light">
                                                     <i class="material-symbols-outlined">delete</i>
                                                 </a>
@@ -49,4 +49,5 @@
             </div>
         </div>
     </div>
+</div>
     @endsection

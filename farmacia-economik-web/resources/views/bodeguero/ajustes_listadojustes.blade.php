@@ -14,7 +14,7 @@
                 <div class="mb-3 text-white">
                     <div class="card">
                         <div class="card-body">
-                            <form method="POST" action="{{route('bodeguero.filtrar_ajustes')}}">
+                            <form method="POST" action="{{route('bodeguero.ajustes_filtrarajustes')}}">
                                 @method('POST')
                                 @csrf
                                 <div class="mb-3">

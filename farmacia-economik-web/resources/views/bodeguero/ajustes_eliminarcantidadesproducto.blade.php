@@ -33,7 +33,7 @@
                             </div>
                         </div>
                         <div class="card-body">
-                                <form action="{{route('bodeguero.crear_ajuste',$producto->id_producto)}}" method="POST">
+                                <form action="{{route('bodeguero.ajuste_crearajuste',$producto->id_producto)}}" method="POST">
                                     @method('POST')
                                     @csrf
                                     <div class="row">

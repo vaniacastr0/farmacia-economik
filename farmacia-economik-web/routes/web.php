@@ -14,20 +14,25 @@ use App\Http\Controllers\UsuariosController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+//INICIO LOGIN
 Route::get('/',[UsuariosController::class,'login'])->name('login.login');
 Route::get('/inicio',[BodegueroController::class,'inicio'])->name('inicio.bodeguero');
-
-Route::get('/inicio/productos',[BodegueroController::class,'ver_productos'])->name('bodeguero.productos');
-Route::get('/inicio/agregar',[BodegueroController::class,'agregar_productos'])->name('bodeguero.agregar');
-Route::post('/inicio/filtrar',[BodegueroController::class,'filtrar_productos'])->name('bodeguero.filtrar');
-Route::get('/inicio/actualizar',[BodegueroController::class,'actualizar_productos'])->name('bodeguero.actualizar');
-Route::get('/inicio/eliminar/productos',[BodegueroController::class,'eliminar_productos'])->name('bodeguero.eliminar_productos');
-Route::get('/inicio/eliminar/{id_producto}',[BodegueroController::class,'eliminar'])->name('bodeguero.eliminar');
-Route::post('/inicio/eliminar/producto{id_producto}',[BodegueroController::class,'crear_ajuste'])->name('bodeguero.crear_ajuste');
-Route::get('/inicio/listado',[BodegueroController::class,'listado_ajustes'])->name('bodeguero.listado_ajustes');
-Route::post('/inicio/filtrar/listado',[BodegueroController::class,'filtrar_ajustes'])->name('bodeguero.filtrar_ajustes');
-
-Route::get('/inicio/agregar/producto',[BodegueroController::class,'agregar_nuevoproducto'])->name('bodeguero.agregar_nuevoproducto');
-Route::post('inicio/agregar/nuevo',[BodegueroController::class,'add_nuevoproducto'])->name('bodeguero.add_nuevoproducto');
+//MANTENCION DE LA TABLA PRODUCTO
+Route::get('/inicio/productos',[BodegueroController::class,'mantencion_verproductos'])->name('bodeguero.mantencion_verproductos');
+Route::get('/inicio/agregar/producto',[BodegueroController::class,'agregar_nuevoproducto'])->name('bodeguero.mantencion_agregarproducto');
+Route::post('inicio/agregar/nuevo',[BodegueroController::class,'mantencion_agregarproductopost'])->name('bodeguero.mantencion_agregarproductopost');
+Route::post('/inicio/filtrar',[BodegueroController::class,'mantencion_verproductosfiltrados'])->name('bodeguero.mantencion_verproductosfiltrados');
+Route::get('/inicio/actualizar',[BodegueroController::class,'mantencion_actualizarproductoslistado'])->name('bodeguero.mantencion_actualizarproductoslistado');
+Route::get('/inicio/actualizar/{id_producto}',[BodegueroController::class,'mantencion_actualizarproducto'])->name('bodeguero.mantencion_actualizarproducto');
+Route::post('/inicio/actualizar/{id_producto}',[BodegueroController::class,'mantencion_actualizarproductopost'])->name('bodeguero.mantencion_actualizarproductopost');
+//AJUSTES DE PRODUCTOS(ELIMINAR X ROBO O MERMA)
+Route::get('/inicio/eliminar/productos',[BodegueroController::class,'ajustes_eliminarcantidades'])->name('bodeguero.ajustes_eliminarcantidades');
+Route::get('/inicio/eliminar/{id_producto}',[BodegueroController::class,'ajustes_eliminarcantidadesproducto'])->name('bodeguero.ajustes_eliminarcantidadesproducto');
+Route::post('/inicio/eliminar/producto{id_producto}',[BodegueroController::class,'ajuste_crearajuste'])->name('bodeguero.ajuste_crearajuste');
+Route::get('/inicio/listado',[BodegueroController::class,'listado_ajustes'])->name('bodeguero.ajustes_listadojustes');
+Route::post('/inicio/filtrar/listado',[BodegueroController::class,'filtrar_ajustes'])->name('bodeguero.ajustes_filtrarajustes');
+//INGRESO DE PRODUCTOS(MERCADERIA NUEVA)
+Route::get('/inicio/agregarmercaderia',[BodegueroController::class,'ingreso_agregarcantidades'])->name('bodeguero.ingreso_agregarcantidades');
+Route::post('/inicio/agregarmercaderia',[BodegueroController::class,'ingreso_agregarcantidadespost'])->name('bodeguero.ingreso_agregarcantidadespost');
 
 
