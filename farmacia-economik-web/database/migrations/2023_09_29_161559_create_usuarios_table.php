@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('usuarios', function (Blueprint $table) {
             //CAMPOS
-            $table->string('tipo',1)->primary();
-            $table->string('rut',10);
-            $table->string('pass',20);
+            $table->string('rut', 10)->primary()->default(' ')->unique();
+            $table->string('tipo_usuario',1);
+            $table->string('password',260);
         });
     }
 

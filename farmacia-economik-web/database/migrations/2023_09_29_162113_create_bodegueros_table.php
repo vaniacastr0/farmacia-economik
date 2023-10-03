@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::create('bodegueros', function (Blueprint $table) {
             //CAMPOS
-            $table->string('rut',10)->primary();
+            $table->string('rut',10)->primary()->default(' ');
             $table->string('nombre',20);
             $table->string('apellido',20);
             //FK
             $table->string('tipo_usuario',1);
-            $table->foreign('tipo_usuario')->references('tipo')->on('usuarios');
+            $table->foreign('rut')->references('rut')->on('usuarios');
 
         });
     }

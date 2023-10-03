@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class IngresoProducto extends Model
 {
     use HasFactory;
-    protected $table = 'ingreso_productos';
+    protected $table = 'ingresos_productos';
     protected $primaryKey = ['id_ingreso', 'id_producto'];
     public $timestamps = false;
     public $incrementing = false;

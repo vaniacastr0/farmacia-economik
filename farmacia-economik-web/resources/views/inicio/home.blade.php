@@ -1,5 +1,3 @@
-@if(auth()->check() && auth()->user()->tipo_usuario == "V")
-
 @extends('templates.master')
 
 @section('contenido-principal')
@@ -11,5 +9,3 @@
     </div>
 </div>
 @endsection
-
-@endif

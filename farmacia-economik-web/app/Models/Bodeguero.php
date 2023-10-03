@@ -17,7 +17,7 @@ class Bodeguero extends Model
     public $timestamps = false;
 
     protected $fillable = [ 
-        'nombre','apellido','tipo_usuario'
+        'nombre','apellido','tipo_usuario','rut'
     ];
 
     public function Usuario():BelongsTo{

@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('ingresos_productos', function (Blueprint $table) {
-            $table->id('id_ingreso'); 
+            $table->unsignedBigInteger('id_ingreso');  
             $table->unsignedBigInteger('id_producto'); // Clave externa a productos
             // Definición de la clave primaria compuesta
             $table->primary(['id_ingreso', 'id_producto']);

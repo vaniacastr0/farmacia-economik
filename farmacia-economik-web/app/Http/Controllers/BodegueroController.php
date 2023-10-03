@@ -5,11 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Producto;
 use App\Models\Categoria;
+use Illuminate\Support\Facades\Auth;
 
 class BodegueroController extends Controller
 {
     public function inicio(){
-        return view('inicio.bodeguero');
+        if(Auth::check()){
+            return view('inicio.bodeguero');
+        }
+        return view('login.login');
+        
     }
 
     public function ver_productos(){
