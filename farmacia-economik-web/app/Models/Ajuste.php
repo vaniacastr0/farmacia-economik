@@ -10,18 +10,22 @@ class Ajuste extends Model
 {
     use HasFactory;
     protected $table = 'ajustes';
-    protected $primaryKey = ['id_producto','fecha'];
+    protected $primaryKey = 'id_ajuste';
     public $timestamps = false;
-    public $incrementing = false;
 
     protected $fillable = [ 
-        'cantidad','motivo'
+        'fecha','cantidad','motivo','id_producto'
     ];
 
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+
+        // Establecer el valor del campo 'fecha' como la fecha actual al crear una instancia de la clase
+        $this->attributes['fecha'] = now();
+    }
+
     public function Producto():BelongsTo{
-        return $this->belongsTo(Prodcuto::class);
+        return $this->belongsTo(Producto::class,'id_producto');
     } 
-
-
-
 }

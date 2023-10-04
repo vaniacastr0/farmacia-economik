@@ -1,7 +1,3 @@
-@php
-$Categorias = [1 =>'Analgesico',2=>'Antiulceroso',3=>'Antidepresivo'];
-@endphp
-
 @extends('templates.master')
 
 @section('contenido-principal')
@@ -10,7 +6,7 @@ $Categorias = [1 =>'Analgesico',2=>'Antiulceroso',3=>'Antidepresivo'];
     <div class="container-fluid d-flex flex-column justify-content-lg-center align-items-center">
         <div class="row">
             <div class="col-12 d-flex justify-content-center py-4">
-                <h3>Listado de productos en bodega</h3>
+                <h3>Listado de Productos</h3>
             </div>
         </div>
         <div class="container">
@@ -19,7 +15,7 @@ $Categorias = [1 =>'Analgesico',2=>'Antiulceroso',3=>'Antidepresivo'];
                     <div class="mb-3 text-white">
                         <div class="card">
                             <div class="card-body">
-                                <form method="POST" action="{{route('bodeguero.filtrar')}}">
+                                <form method="POST" action="{{route('bodeguero.mantencion_verproductosfiltrados')}}">
                                     @method('POST')
                                     @csrf
                                     <div class="mb-3">
@@ -60,6 +56,7 @@ $Categorias = [1 =>'Analgesico',2=>'Antiulceroso',3=>'Antidepresivo'];
                                                 <th>Nombre</th>
                                                 <th>Stock</th>
                                                 <th>Categoria</th>
+                                                <th>Detalle</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -69,6 +66,14 @@ $Categorias = [1 =>'Analgesico',2=>'Antiulceroso',3=>'Antidepresivo'];
                                                 <td>{{ $producto->nombre_producto }}</td>
                                                 <td>{{ $producto->stock_producto }}</td>
                                                 <td>{{ $producto->Categoria->nombre }}</td>
+                                                <td> 
+                                                    <div class="col">
+                                                        <a href="{{route('bodeguero.mantencion_verproductodetalle', $producto->id_producto)}}"
+                                                            class="btn btn-light">
+                                                            <i class="material-symbols-outlined">info</i>
+                                                        </a>
+                                                    </div>
+                                                </td>
                                             </tr>
                                         </tbody>
                                         @endforeach

@@ -17,6 +17,7 @@ return new class extends Migration
             //CAMPOS
             $table->id('id_producto');
             $table->string('nombre_producto',30);
+            $table->integer('precio_producto');
             $table->smallInteger('stock_producto');
             //FK
             $table->unsignedBigInteger('id_categoria');

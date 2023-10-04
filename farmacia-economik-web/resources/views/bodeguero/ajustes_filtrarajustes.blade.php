@@ -5,7 +5,7 @@
     <div class="container-fluid d-flex flex-column justify-content-lg-center align-items-center">
         <div class="row">
             <div class="col-12 d-flex justify-content-center py-4">
-                <h3>Listado de productos en bodega</h3>
+                <h3>Listado de ajuste de {{$producto->nombre_producto}}</h3>
             </div>
         </div>
         <div class="container">
@@ -18,19 +18,21 @@
                                     <table class="table table-striped table-hover">
                                         <thead>
                                             <tr>
-                                                <th>Id</th>
-                                                <th>Nombre</th>
-                                                <th>Stock</th>
-                                                <th>Categoria</th>
+                                                <th>Id Ajuste</th>
+                                                <th>Fecha</th>
+                                                <th>Cantidad</th>
+                                                <th>Motivo</th>
+                                                <th>Producto</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($productos as $producto)
+                                            @foreach ($ajustes as $ajuste)
                                             <tr>
-                                                <td>{{ $producto->id_producto }}</td>
-                                                <td>{{ $producto->nombre_producto }}</td>
-                                                <td>{{ $producto->stock_producto }}</td>
-                                                <td>{{ $nombre_categoria }}</td>
+                                                <td>{{ $ajuste->id_ajuste }}</td>
+                                                <td>{{ $ajuste->fecha }}</td>
+                                                <td>{{ $ajuste->cantidad }}</td>
+                                                <td>{{ $ajuste->motivo }}</td>
+                                                <td>{{ $nombre_producto }}</td>
                                             </tr>
                                         </tbody>
                                         @endforeach

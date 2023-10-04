@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Producto extends Model
 {
@@ -15,8 +16,12 @@ class Producto extends Model
     public $timestamps = false;
 
     protected $fillable = [ 
-        'nombre_producto','stock_producto','id_categoria'
+        'nombre_producto','precio_producto','stock_producto','id_categoria'
     ];
+
+    public function DetalleProducto():HasMany{
+        return $this->hasMany(DetalleProducto::class,'id_producto');
+    }
 
     public function Categoria():BelongsTo{
         return $this->belongsTo(Categoria::class,'id_categoria');

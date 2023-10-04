@@ -19,20 +19,24 @@
                     <h1 class="fw-bold text-center py-2">
                         Bienvenido a farmacia Economik
                     </h1>
-                    <form action="#">
+                    <form action="/" method="POST" autocomplete="off">
+                        @csrf
+                        @include('validated.messages')
                         <div class="mb-4 mt-5">
                             <label for="rut" class="form-label">Rut</label>
-                            <input type="text" class="form-control" id="rut" name="rut" />
+                            <input type="text" class="form-control" id="rut" name="rut"/>
                         </div>
                         <div class="mb-4 mt-5">
                             <label for="password" class="form-label">Contraseña</label>
-                            <input type="password" class="form-control" id="password" name="password" />
+                            <input type="password" class="form-control" id="password" name="password"/>
                         </div>
-                        <div class="d-grid my-4 p-5">
-                            <a href="{{route('inicio.bodeguero')}}">Iniciar Secion</a>
-                            <!-- <button type="submit" class="btn btn-primary" href="#">
+                        <div class="d-grid my-4">
+                            <button type="submit" class="btn btn-primary" href="{{route('inicio.bodeguero')}}">
                                 Iniciar Sesión
-                            </button> -->
+                            </button> 
+                        </div>
+                        <div class="d-grid my-4">
+                            <a href="{{route('register.show')}}">Registrarse</a>
                         </div>
                     </form>
                 </div>

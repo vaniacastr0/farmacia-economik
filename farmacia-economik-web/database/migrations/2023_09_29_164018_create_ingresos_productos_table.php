@@ -13,20 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('ingresos_productos', function (Blueprint $table) {
+        Schema::create('ingreso_productos', function (Blueprint $table) {
             $table->id('id_ingreso'); 
-            $table->unsignedBigInteger('id_producto'); // Clave externa a productos
-            // Definición de la clave primaria compuesta
-            $table->primary(['id_ingreso', 'id_producto']);
-        
-            $table->integer('cantidad');
-            $table->string('rut_bodeguero', 10); // Clave externa a bodegueros
-        
-            // Definición de la clave externa a productos
-            $table->foreign('id_producto')->references('id_producto')->on('productos');
+            $table->smallInteger('cantidad');
+            $table->unsignedBigInteger('id_producto'); 
+            $table->string('rut_usuario', 10);
 
-            // Definición de la clave externa a bodegueros
-            $table->foreign('rut_bodeguero')->references('rut')->on('bodegueros');
+            $table->foreign('id_producto')->references('id_producto')->on('productos');
+            $table->foreign('rut_usuario')->references('rut')->on('usuarios');
+
+
         });
     }
 
