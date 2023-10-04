@@ -22,11 +22,11 @@ return new class extends Migration
             $table->string('metodo_pago', 15);
         
             // Claves foráneas
-            $table->string('rut_vendedor', 10);
+            $table->string('rut_usuario', 10);
             $table->string('rut_cliente', 10);
         
             // Restricciones de clave foránea
-            $table->foreign('rut_vendedor')->references('rut')->on('vendedores');
+            $table->foreign('rut_usuario')->references('rut')->on('usuarios');
             $table->foreign('rut_cliente')->references('rut')->on('clientes');
         });
     }

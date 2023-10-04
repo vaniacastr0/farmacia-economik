@@ -18,7 +18,7 @@
                                         <i class="fas fa-trash-alt fa-2x"></i>
                                     </div>
                                     <div class="col-11 text-start">
-                                        <h2>{{$numero_filas}}</h2>
+                                        <h2>34</h2>
                                     </div>
                                 </div>
                             </div>
@@ -38,7 +38,7 @@
                                             <i class="fas fa-trash-alt fa-2x"></i>
                                         </div>
                                         <div class="col-11 text-start">
-                                            <h2>{{$numero_filas}}</h2>
+                                            <h2>34</h2>
                                         </div>
                                     </div>
                                 </div>
@@ -59,7 +59,7 @@
                                             <i class="fas fa-trash-alt fa-2x"></i>
                                         </div>
                                         <div class="col-11 text-start">
-                                            <h2>{{$numero_filas}}</h2>
+                                            <h2>34</h2>
                                         </div>
                                     </div>
                                 </div>

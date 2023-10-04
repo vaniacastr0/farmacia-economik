@@ -15,11 +15,11 @@ class Venta extends Model
     public $timestamps = true;
 
     protected $fillable = [ 
-        'metodo_pago','rut_vendedor','rut_cliente'
+        'metodo_pago','rut_usuario','rut_cliente'
     ];
     
-    public function Vendedor():BelongsTo{
-        return $this->belongsTo(Vendedor::class);
+    public function Usuarios():BelongsTo{
+        return $this->belongsTo(Usuario::class);
     } 
 
     public function Cliente():BelongsTo{

@@ -7,55 +7,82 @@ use App\Models\Producto;
 use App\Models\Categoria;
 use App\Models\Ajuste;
 use App\Models\DetalleProducto;
+use Illuminate\Support\Facades\Auth;
 
 class BodegueroController extends Controller
 {
     //INICIO LOGIN
     public function inicio(){
-        $numero_filas = Producto::count();
-        return view('inicio.paginaprincipal',compact('numero_filas'));
+        if(Auth::check()){
+            return view('inicio.paginaprincipal');
+        }
+        return view('login.login');
+        
+    }
+    //PAGINA PRINCIPAL
+    public function paginaprincipal(){
+        if(Auth::check()){
+            return view('inicio.paginaprincipal');
+        }
+        return view('login.login');
     }
     //MANTENCION VER PRODUCTOS
     public function mantencion_verproductos(){
-        //Todas las categorias
+        if(Auth::check()){
+            //Todas las categorias
         $categorias = Categoria::all();
         //todos los productos que tengan categoria
         $productos = Producto::with('Categoria')->get();
         return view('bodeguero.mantencion_verproductos', compact(['productos','categorias']));
+        }
+        return view('login.login');
     }
 
     public function mantencion_verproductosfiltrados(Request $request){
-        //buscar categoria que necesito
+        if(Auth::check()){
+            //buscar categoria que necesito
         $categoria = Categoria::find($request)->first();
         //productos que tengan la categoria que necesito
         $productos = Producto::where('id_categoria',$categoria->id_categoria)->get();
         //guardar el nombre de la categoria 
         $nombre_categoria = $categoria->nombre;
         return view('bodeguero.mantencion_verproductosfiltrados',compact(['categoria','productos','nombre_categoria']));
+        }
+        return view('login.login');
     }
 
     public function mantencion_verproductodetalle($id){
-        $producto = Producto::find($id);
+        if(Auth::check()){
+            $producto = Producto::find($id);
         $detalle_producto = DetalleProducto::find($id);
         $categorias = Categoria::all();
         $productos = Producto::with('Categoria')->get();
         return view('bodeguero.mantencion_verproductodetalle',compact(['producto','detalle_producto','categorias','productos']));
+        }
+        return view('login.login');
     }
     //MANTENCION ACTUALIZAR PRODUCTOS
     public function mantencion_actualizarproductoslistado(){
-        $productos = Producto::all();
+        if(Auth::check()){
+            $productos = Producto::all();
         return view('bodeguero.mantencion_actualizarproductoslistado',compact('productos'));
+        }
+        return view('login.login');
     }
 
     public function mantencion_actualizarproducto($id){
-        $categorias = Categoria::all();
+        if(Auth::check()){
+            $categorias = Categoria::all();
         $producto = Producto::find($id);
         $detalle_producto = DetalleProducto::find($id);
         return view('bodeguero.mantencion_actualizarproducto',compact(['producto','categorias','detalle_producto']));
+        }
+        return view('login.login');
     }
 
     public function mantencion_actualizarproductopost(Request $request,$id){
-        $producto = Producto::find($id);
+        if(Auth::check()){
+            $producto = Producto::find($id);
         $detalle_producto = DetalleProducto::find($id);
 
         $producto->nombre_producto = $request->input('nombre');
@@ -69,16 +96,22 @@ class BodegueroController extends Controller
 
         $productos = Producto::all();
         return view('bodeguero.mantencion_actualizarproductoslistado',compact('productos'));
+        }
+        return view('login.login');
     }
 
     //MANTENCION AGREGAR PRODUCTO
     public function agregar_nuevoproducto(){
-        $categorias = Categoria::all();
+        if(Auth::check()){
+            $categorias = Categoria::all();
         return view('bodeguero.mantencion_agregarproducto',compact('categorias'));
+        }
+        return view('login.login');
     }
 
     public function mantencion_agregarproductopost(Request $request){
-        //Guardar nuevo producto en tabla PRODUCTO
+        if(Auth::check()){
+            //Guardar nuevo producto en tabla PRODUCTO
         $nuevo_producto = new Producto;
         $nuevo_producto->nombre_producto = $request->input('nombre');
         $nuevo_producto->precio_producto = $request->input('precio');
@@ -88,49 +121,70 @@ class BodegueroController extends Controller
 
         $categorias = Categoria::all();
         return view('bodeguero.mantencion_agregarproducto',compact('categorias'));
+        }
+        return view('login.login');
     }
 
     //MANTECION ELIMINAR PRODUCTOS
     public function mantencion_eliminarproductoslistado(){
-        $productos = Producto::all();
+        if(Auth::check()){
+            $productos = Producto::all();
         return view('bodeguero.mantencion_eliminarproductoslistado',compact('productos'));
+        }
+        return view('login.login');
     }
 
     public function mantencion_eliminarproductodelete($id){
-        $producto = Producto::findOrFail($id);
+        if(Auth::check()){
+            $producto = Producto::findOrFail($id);
         $producto->DetalleProducto()->delete();
         $producto->delete();
         return redirect()->route('bodeguero.mantencion_eliminarproductoslistado')->with('success', 'La cuenta y las imágenes relacionadas se han eliminado correctamente.');
+        }
+        return view('login.login');
     }
 
-    
     //AJUSTES LISTADO DE AJUSTES
     public function listado_ajustes(){
-        $productos = Producto::all();
+        if(Auth::check()){
+            $productos = Producto::all();
         $ajustes = Ajuste::with('Producto')->get();
         return view('bodeguero.ajustes_listadojustes',compact(['productos','ajustes']));
+        }
+        return view('login.login');
     }
 
     public function filtrar_ajustes(Request $request){
-        $producto = Producto::find($request)->first();
+        if(Auth::check()){
+            $producto = Producto::find($request)->first();
         $nombre_producto = $producto->nombre_producto;
         //dd($nombre_producto);
         $ajustes = Ajuste::where('id_producto',$producto->id_producto)->get();
         return view('bodeguero.ajustes_filtrarajustes',compact(['producto','ajustes','nombre_producto']));
+        }
+        return view('login.login');
     }
+
 
     //AJUSTES ELIMINAR CANTIDADES DE MERCADERIA
     public function ajustes_eliminarcantidades(){
-        $productos = Producto::with('Categoria')->get();
-        return view('bodeguero.ajustes_eliminarcantidades',compact('productos'));
+        if(Auth::check()){
+            $productos = Producto::with('Categoria')->get();
+            return view('bodeguero.ajustes_eliminarcantidades',compact('productos'));
+        }
+        return view('login.login');
     }
 
     public function ajustes_eliminarcantidadesproducto($id){
-        $producto = Producto::find($id);
+        if(Auth::check()){
+            $producto = Producto::find($id);
         return view('bodeguero.ajustes_eliminarcantidadesproducto',compact('producto'));
+        }
+        return view('login.login');
     }
 
     public function ajuste_crearajuste(Request $request,$id){
+        if(Auth::check()){
         //Crear tabla ajuste
         $ajuste = new Ajuste();
         $ajuste->id_producto = $id;
@@ -145,17 +199,23 @@ class BodegueroController extends Controller
 
         $productos = Producto::with('Categoria')->get();
         return view('bodeguero.ajustes_eliminarcantidades',compact('productos'));
+        }
+        return view('login.login');
     }
 
     //INGRESO DE CANTIDADES DE PRODUCTOS
     public function ingreso_agregarcantidades(){
-        $productos = Producto::all();
-        return view('bodeguero.ingreso_agregarcantidades',compact('productos'));
+        if(Auth::check()){
+            $productos = Producto::all();
+            return view('bodeguero.ingreso_agregarcantidades',compact('productos'));
+        }
+        return view('login.login');
     }
 
     //INGRESO DE NUEVA MARCADERIA
     public function ingreso_agregarcantidadespost(Request $request){
-        $producto = Producto::find($request->producto);
+        if(Auth::check()){
+            $producto = Producto::find($request->producto);
         $producto->stock_producto += $request->input('cantidad');
         $producto->save();
 
@@ -169,5 +229,7 @@ class BodegueroController extends Controller
 
         $productos = Producto::all();
         return view('bodeguero.ingreso_agregarcantidades',compact('productos'));
+        }
+        return view('login.login');
     }
 }

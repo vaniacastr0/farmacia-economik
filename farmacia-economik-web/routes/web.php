@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BodegueroController;
 use App\Http\Controllers\UsuariosController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\LogoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +20,16 @@ use App\Http\Controllers\UsuariosController;
 //INICIO LOGIN
 Route::get('/',[UsuariosController::class,'login'])->name('login.login');
 Route::get('/inicio',[BodegueroController::class,'inicio'])->name('inicio.bodeguero');
+//login
+Route::get('/', [LoginController::class, 'show'])->name('login.login');
+Route::post('/', [LoginController::class, 'login'])->name('login.post');
+//register
+Route::get('/register', [RegisterController::class, 'show'])->name('register.show');
+Route::post('/register', [RegisterController::class, 'register'])->name('register.post');
+//logout
+Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
+//PAGINA PRINCIPAL
+Route::get('inicio/principal',[BodegueroController::class,'paginaprincipal'])->name('inicio.paginaprincipal');
 //------------MANTENCION DE LA TABLA PRODUCTO-------------
 //VER PRODUCTOS
 Route::get('/inicio/ver/productos',[BodegueroController::class,'mantencion_verproductos'])->name('bodeguero.mantencion_verproductos');

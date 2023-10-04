@@ -17,11 +17,10 @@ return new class extends Migration
             $table->id('id_ingreso'); 
             $table->smallInteger('cantidad');
             $table->unsignedBigInteger('id_producto'); 
-            $table->string('rut_bodeguero', 10);
-            
+            $table->string('rut_usuario', 10);
+
             $table->foreign('id_producto')->references('id_producto')->on('productos');
-            $table->foreign('rut_bodeguero')->references('rut')->on('bodegueros');
-        
+            $table->foreign('rut_usuario')->references('rut')->on('usuarios');
 
 
         });

@@ -15,11 +15,11 @@ class IngresoProducto extends Model
     public $timestamps = false;
 
     protected $fillable = [ 
-        'cantidad','rut_bodeguero','id_producto'
+        'cantidad','rut_usuario','id_producto'
     ];
 
-    public function Bodeguero():BelongsTo{
-        return $this->belongsTo(Bodeguero::class);
+    public function Usuarios():BelongsTo{
+        return $this->belongsTo(Usuario::class);
     }
 
     public function Producto():HasMany{

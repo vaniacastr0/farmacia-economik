@@ -4,28 +4,37 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
+
 // use Illuminate\Foundation\Auth\User as Authenticable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Usuario extends Model
+class Usuario extends Authenticatable
 {
     use HasFactory;
     protected $table = 'usuarios';
-    protected $primaryKey = 'tipo';
+    protected $primaryKey = 'rut';
     protected $keyType = 'string';
     public $incrementing = false;
     public $timestamps = false;
 
 
     protected $fillable = [ 
-        'rut','password'
+        'rut','password','nombre','apellido','tipo_usuario',
     ];
 
-    public function Bodeguero():HasMany{
-        return $this->hasMany(Bodeguero::class);
+
+    public function Ingreso_Productos(){
+        return $this->hasMany(IngresoProductos::class, 'rut');
     }
 
-    public function Vendedor():HasMany{
-        return $this->hasMany(Vendedor::class);
+    public function Ventas(){
+        return $this->hasMany(Ventas::class, 'rut');
     }
+
+    public function setPasswordAttribute($value){
+        $this->attributes['password'] = bcrypt($value);
+    }
+    
 }
