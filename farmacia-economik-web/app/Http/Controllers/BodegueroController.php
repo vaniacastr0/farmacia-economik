@@ -33,6 +33,13 @@ class BodegueroController extends Controller
         return view('bodeguero.mantencion_verproductosfiltrados',compact(['categoria','productos','nombre_categoria']));
     }
 
+    public function mantencion_verproductodetalle($id){
+        $producto = Producto::find($id);
+        $detalle_producto = DetalleProducto::find($id);
+        $categorias = Categoria::all();
+        $productos = Producto::with('Categoria')->get();
+        return view('bodeguero.mantencion_verproductodetalle',compact(['producto','detalle_producto','categorias','productos']));
+    }
     //MANTENCION ACTUALIZAR PRODUCTOS
     public function mantencion_actualizarproductoslistado(){
         $productos = Producto::all();
@@ -73,22 +80,26 @@ class BodegueroController extends Controller
         //Guardar nuevo producto en tabla PRODUCTO
         $nuevo_producto = new Producto;
         $nuevo_producto->nombre_producto = $request->input('nombre');
+        $nuevo_producto->precio_producto = $request->input('precio');
         $nuevo_producto->stock_producto = 0;
         $nuevo_producto->id_categoria = $request->input('categoria');
         $nuevo_producto->save();
-        //Obtener el id_producto
-        $id_nuevoproducto = $nuevo_producto->id_producto;
-        //Agregar nuevo producto a la tabla DETALLE_PRODUCTO
-        $nuevo_detalleproducto = new DetalleProducto;
-        $nuevo_detalleproducto->id_producto = $id_nuevoproducto;
-        $nuevo_detalleproducto->fecha_elab = $request->input('elab');
-        $nuevo_detalleproducto->fecha_venc = $request->input('venc');
-        $nuevo_detalleproducto->stock = 0;
-        $nuevo_detalleproducto->precio = $request->input('precio');
-        $nuevo_detalleproducto->save();
 
         $categorias = Categoria::all();
         return view('bodeguero.mantencion_agregarproducto',compact('categorias'));
+    }
+
+    //MANTECION ELIMINAR PRODUCTOS
+    public function mantencion_eliminarproductoslistado(){
+        $productos = Producto::all();
+        return view('bodeguero.mantencion_eliminarproductoslistado',compact('productos'));
+    }
+
+    public function mantencion_eliminarproductodelete($id){
+        $producto = Producto::findOrFail($id);
+        $producto->DetalleProducto()->delete();
+        $producto->delete();
+        return redirect()->route('bodeguero.mantencion_eliminarproductoslistado')->with('success', 'La cuenta y las imágenes relacionadas se han eliminado correctamente.');
     }
 
     
@@ -144,9 +155,16 @@ class BodegueroController extends Controller
     //INGRESO DE NUEVA MARCADERIA
     public function ingreso_agregarcantidadespost(Request $request){
         $producto = Producto::find($request->producto);
-        $cantidad = $request->cantidad;
-        $producto->stock_producto += $cantidad;
+        $producto->stock_producto += $request->input('cantidad');
         $producto->save();
+
+        $nuevodetalle_producto = new DetalleProducto();
+        $nuevodetalle_producto->id_producto = $producto->id_producto;
+        $nuevodetalle_producto->fecha_elab = $request->input('elab');
+        $nuevodetalle_producto->fecha_venc = $request->input('venc');
+        $nuevodetalle_producto->stock = $request->input('cantidad');
+        $nuevodetalle_producto->save();
+
 
         $productos = Producto::all();
         return view('bodeguero.ingreso_agregarcantidades',compact('productos'));

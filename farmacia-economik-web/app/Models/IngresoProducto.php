@@ -11,12 +11,11 @@ class IngresoProducto extends Model
 {
     use HasFactory;
     protected $table = 'ingreso_productos';
-    protected $primaryKey = ['id_ingreso', 'id_producto'];
+    protected $primaryKey = 'id_ingreso';
     public $timestamps = false;
-    public $incrementing = false;
 
     protected $fillable = [ 
-        'cantidad','rut_bodeguero'
+        'cantidad','rut_bodeguero','id_producto'
     ];
 
     public function Bodeguero():BelongsTo{

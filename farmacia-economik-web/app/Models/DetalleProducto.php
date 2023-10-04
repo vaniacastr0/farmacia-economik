@@ -10,17 +10,15 @@ class DetalleProducto extends Model
 {
     use HasFactory;
     protected $table = 'detalle_producto';
-    protected $primaryKey = 'id_producto';
-    public $incrementing = false;
+    protected $primaryKey = 'id_detalle_producto';
     public $timestamps = false;
 
     protected $fillable = [ 
-        'fecha_elab','fecha_venc','stock','precio'
+        'fecha_elab','fecha_venc','stock','id_producto'
     ];
 
 
     public function Producto():BelongsTo{
         return $this->belongsTo(Producto::class);
     } 
-
 }

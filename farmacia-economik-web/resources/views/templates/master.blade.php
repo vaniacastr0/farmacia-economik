@@ -37,13 +37,14 @@
                 <div class="position-sticky">
                     <!-- Contenido de la barra lateral -->
                     <ul class="nav flex-column">
-                        <div class="user-info">
+                        <div class="user-info text-center align-items-center d-flex flex-column pb-3">
                             <div class="image py-3">
                                 <img src="{{ asset('imagenes/user.png') }}" width="60" height="60" alt="User" />
                             </div>
                             <div class="info-container">
                                 <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Valentina Gonzalez</div>
+                                    Valentina Gonzalez
+                                </div>
                                 <div class="email">Bodeguero</div>
                             </div>
                         </div>
@@ -64,7 +65,7 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" href="#" style="padding-left: 30px;">
+                                        <a class="nav-link text-dark" href="{{route('bodeguero.mantencion_eliminarproductoslistado')}}" style="padding-left: 30px;">
                                             <i class="material-symbols-outlined align-middle" style="margin-right: 10px;">delete</i>Eliminar producto
                                         </a>
                                     </li>

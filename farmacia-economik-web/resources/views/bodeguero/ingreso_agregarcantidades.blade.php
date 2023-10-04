@@ -36,6 +36,20 @@
                                             </div>
                                             <div class="col-12 col-lg">
                                                 <div class="mb-3">
+                                                    <label for="elab" class="form-label">Fecha Elaboracion</label>
+                                                    <input type="date" id="elab" name="elab"
+                                                        class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-lg">
+                                                <div class="mb-3">
+                                                    <label for="venc" class="form-label">Fecha Vencimiento</label>
+                                                    <input type="date" id="venc" name="venc"
+                                                        class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-lg">
+                                                <div class="mb-3">
                                                     <label for="cantidad" class="form-label">Cantidad</label>
                                                     <input type="number" id="cantidad" name="cantidad"
                                                         class="form-control">
