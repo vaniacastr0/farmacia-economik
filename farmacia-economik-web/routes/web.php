@@ -33,7 +33,6 @@ Route::post('/inicio/actualizar/{id_producto}',[BodegueroController::class,'mant
 Route::get('inicio/eliminar/productos',[BodegueroController::class, 'mantencion_eliminarproductoslistado'])->name('bodeguero.mantencion_eliminarproductoslistado');
 Route::delete('inicio/eliminar/producto/{id}',[BodegueroController::class,'mantencion_eliminarproductodelete'])-> name('bodegueros.mantencion_eliminarproductodelete');
 
-
 //----------AJUSTES DE PRODUCTOS(ELIMINAR X ROBO O MERMA)---------
 //AGREGAR AJUSTE(ELIMINAR MERCADERIA)
 Route::get('/inicio/eliminarmercaderia/productos',[BodegueroController::class,'ajustes_eliminarcantidades'])->name('bodeguero.ajustes_eliminarcantidades');
@@ -42,7 +41,6 @@ Route::post('/inicio/eliminar/producto{id_producto}',[BodegueroController::class
 Route::get('/inicio/listado',[BodegueroController::class,'listado_ajustes'])->name('bodeguero.ajustes_listadojustes');
 //LISTAR AJUSTES
 Route::post('/inicio/filtrar/listado',[BodegueroController::class,'filtrar_ajustes'])->name('bodeguero.ajustes_filtrarajustes');
-
 
 //-----------INGRESO DE PRODUCTOS(MERCADERIA NUEVA)--------------
 //INGRESO DE PRODUCTOS

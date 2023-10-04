@@ -12,7 +12,8 @@ class BodegueroController extends Controller
 {
     //INICIO LOGIN
     public function inicio(){
-        return view('inicio.bodeguero');
+        $numero_filas = Producto::count();
+        return view('inicio.paginaprincipal',compact('numero_filas'));
     }
     //MANTENCION VER PRODUCTOS
     public function mantencion_verproductos(){

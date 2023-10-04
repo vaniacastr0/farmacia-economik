@@ -25,7 +25,7 @@
 
 <body>
     <div class="container-fluid">
-        <div class="row py-3 bg-secondary px-3">
+        <div class="row py-3 bg-info px-3">
             <div class="col">
                 <span class="fs-4 text-white">GESTION DE INVENTARIO PARA FARMACIA ECONOMIK</span> <i
                     class="material-symbols-outlined fs-3 text-white">store</i>

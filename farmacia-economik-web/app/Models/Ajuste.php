@@ -28,7 +28,4 @@ class Ajuste extends Model
     public function Producto():BelongsTo{
         return $this->belongsTo(Producto::class,'id_producto');
     } 
-
-
-
 }
