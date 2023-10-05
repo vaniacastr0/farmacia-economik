@@ -57,7 +57,7 @@
                             <div class="info-container">
                                 <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     @if(auth()->user()->tipo_usuario === 'B')
-                                    Bodeguero {{ auth()->user()->nombre }} {{ auth()->user()->apellido }}
+                                    Bodeguero <span class="fw-bold">{{ auth()->user()->nombre }} {{ auth()->user()->apellido }}</span>
                                     @endif
 
                                     @if(auth()->user()->tipo_usuario === 'V')
@@ -132,7 +132,7 @@
                                             href="{{route('bodeguero.ajustes_eliminarcantidades')}} "
                                             style="padding-left: 30px;">
                                             <i class="material-symbols-outlined align-middle fs-4"
-                                                style="margin-right: 10px;">docs_add_on</i>Ingresar un ajuste
+                                                style="margin-right: 10px;">docs_add_on</i>Agregar un ajuste
                                         </a>
                                     </li>
                                 </ul>
@@ -146,10 +146,18 @@
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
                                         <a class="nav-link text-dark"
+                                            href="#"
+                                            style="padding-left: 30px;">
+                                            <i class="material-symbols-outlined align-middle fs-4"
+                                                style="margin-right: 10px;">sort</i>Listado de ingresos
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark"
                                             href="{{route('bodeguero.ingreso_agregarcantidades')}}"
                                             style="padding-left: 30px;">
                                             <i class="material-symbols-outlined align-middle fs-4"
-                                                style="margin-right: 10px;">sort</i>Ingreso
+                                                style="margin-right: 10px;">docs_add_on</i>Agregar un ingreso
                                         </a>
                                     </li>
                                 </ul>

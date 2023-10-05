@@ -19,6 +19,7 @@
                                         <tr>
                                             <th>Id</th>
                                             <th>Nombre</th>
+                                            <th>Precio</th>
                                             <th>Stock</th>
                                             <th>Categoria</th>
                                             <th>Eliminar</th>
@@ -29,6 +30,7 @@
                                         <tr>
                                             <td>{{ $producto->id_producto }}</td>
                                             <td>{{ $producto->nombre_producto }}</td>
+                                            <td>{{ $producto->precio_producto }}</td>
                                             <td>{{ $producto->stock_producto }}</td>
                                             <td>{{ $producto->Categoria->nombre }}</td>
                                             <td>
@@ -38,7 +40,7 @@
                                                         <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <h1 class="modal-title fs-5" id="borrarModalLabel{{$producto->id_producto}}">
-                                                                    Confirmar borrado</h1>
+                                                                    Confirmación de borrado</h1>
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                                     aria-label="Close"></button>
                                                             </div>
@@ -59,9 +61,9 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-2">
-                                                    <button type="button" class="btn btn-sm btn-primary"
+                                                    <button type="button" class="btn btn-sm btn-danger"
                                                         data-bs-toggle="modal" data-bs-target="#borrarModal{{$producto->id_producto}}">
-                                                        <span class="material-symbols-outlined">
+                                                        <span class="material-symbols-outlined text-white">
                                                             delete
                                                         </span>
                                                     </button>

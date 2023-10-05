@@ -43,6 +43,12 @@
                     </div>
                 </div>
             </div>
+            <div class="row mt-3">
+                <div class="col-12 col-lg-2">
+                    <a href="javascript:history.back()" class="btn btn-secondary">Volver</a>
+                </div>
+                
+            </div>
         </div>
 </body>
 @endsection
