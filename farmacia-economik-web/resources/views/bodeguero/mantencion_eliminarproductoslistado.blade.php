@@ -48,8 +48,10 @@
                                                                 @method('delete')
                                                                 @csrf
                                                                 <div class="modal-body">
+                                                                    Se borraran todos los datos de este producto.
                                                                     ¿Esta seguro que desea eliminar el producto <span
                                                                         class="text-primary fw-bold">{{$producto->nombre_producto}}</span>?
+                                                                        
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-light"

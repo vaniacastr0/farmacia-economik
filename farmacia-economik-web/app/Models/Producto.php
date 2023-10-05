@@ -35,4 +35,11 @@ class Producto extends Model
         return $this->belongsToMany(Venta::class)->withPivot(['id_venta','precio','cantidad']);
     }
 
+    public function IngresoProducto():BelongsTo{
+        return $this->belongTo(IngresoProducto::class);
+    }
+
+    public function Ajuste():HasMany{
+        return $this->hasMany(Ajuste::class);
+    }
 }

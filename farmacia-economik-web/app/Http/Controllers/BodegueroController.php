@@ -11,6 +11,7 @@ use App\Models\Usuario;
 use App\Models\IngresoProducto;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\IngresoRequest;
+use App\Http\Requests\ActualizacionRequest;
 
 class BodegueroController extends Controller
 {
@@ -95,7 +96,7 @@ class BodegueroController extends Controller
         return view('login.login');
     }
 
-    public function mantencion_actualizarproductopost(IngresoRequest $request,$id){
+    public function mantencion_actualizarproductopost(ActualizacionRequest $request,$id){
         if(Auth::check() && auth()->user()->tipo_usuario === 'B'){
             //FORMATEA EL NOMBRE
             $data = $request->all();
@@ -161,6 +162,10 @@ class BodegueroController extends Controller
         if(Auth::check() && auth()->user()->tipo_usuario === 'B'){
             $producto = Producto::findOrFail($id);
             $producto->DetalleProducto()->delete();
+            $ingreso_producto = IngresoProducto::where('id_producto','=',$id);
+            $ingreso_producto->delete();
+            $ajuste_producto = Ajuste::where('id_producto','=',$id);
+            $ajuste_producto->delete();
             $producto->delete();
             return redirect()->route('bodeguero.mantencion_eliminarproductoslistado')->with('success', 'La cuenta y las imágenes relacionadas se han eliminado correctamente.');
         }
