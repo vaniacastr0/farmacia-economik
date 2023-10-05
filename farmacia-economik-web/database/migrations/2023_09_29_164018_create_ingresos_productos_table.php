@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('ingreso_productos', function (Blueprint $table) {
             $table->id('id_ingreso'); 
+            $table->date('fecha'); //fecha de creacion de la tabla
             $table->smallInteger('cantidad');
             $table->unsignedBigInteger('id_producto'); 
             $table->string('rut_usuario', 10);

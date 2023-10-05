@@ -19,21 +19,21 @@
                                     <table class="table table-striped table-hover">
                                         <thead>
                                             <tr>
-                                                <th>Id Ajuste</th>
-                                                <th>Fecha</th>
+                                                <th>Id Ingreso</th>
+                                                <th>Fecha del ingreso</th>
                                                 <th>Cantidad</th>
-                                                <th>Motivo</th>
                                                 <th>Producto</th>
+                                                <th>Usuario</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($ajustes as $ajuste)
+                                            @foreach ($ingresos as $ingreso)
                                             <tr>
-                                                <td>{{ $ajuste->id_ajuste}}</td>
-                                                <td>{{ $ajuste->fecha }}</td>
-                                                <td>{{ $ajuste->cantidad }}</td>
-                                                <td>{{ $ajuste->motivo }}</td>
-                                                <td>{{ $ajuste->Producto->nombre_producto}}</td>
+                                                <td>{{ $ingreso->id_ingrso}}</td>
+                                                <td> fecha xd</td>
+                                                <td>{{ $ingreso->cantidad }}</td>
+                                                <td>{{ $ingreso->Producto->nombre_producto }}</td>
+                                                <td>{{ $ingreso->rut_usuario }}</td>
                                             </tr>
                                         </tbody>
                                         @endforeach
@@ -47,7 +47,7 @@
                     <div class="mb-3 text-white">
                         <div class="card">
                             <div class="card-body">
-                                <form method="POST" action="{{route('bodeguero.ajustes_filtrarajustes')}}">
+                                <form method="POST" action="#">
                                     @method('POST')
                                     @csrf
                                     <div class="mb-3">

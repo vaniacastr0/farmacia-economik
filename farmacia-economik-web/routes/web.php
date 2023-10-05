@@ -56,6 +56,8 @@ Route::get('/inicio/listado',[BodegueroController::class,'listado_ajustes'])->na
 Route::post('/inicio/filtrar/listado',[BodegueroController::class,'filtrar_ajustes'])->name('bodeguero.ajustes_filtrarajustes');
 
 //-----------INGRESO DE PRODUCTOS(MERCADERIA NUEVA)--------------
+//LISTADO DE INGRESOS
+Route::get('/inicio/ajustes',[BodegueroController::class,'ingreso_listadoingresos'])->name('bodeguero.ingreso_listadoingresos');
 //INGRESO DE PRODUCTOS
 Route::get('/inicio/agregarmercaderia',[BodegueroController::class,'ingreso_agregarcantidades'])->name('bodeguero.ingreso_agregarcantidades');
 Route::post('/inicio/agregarmercaderia',[BodegueroController::class,'ingreso_agregarcantidadespost'])->name('bodeguero.ingreso_agregarcantidadespost');

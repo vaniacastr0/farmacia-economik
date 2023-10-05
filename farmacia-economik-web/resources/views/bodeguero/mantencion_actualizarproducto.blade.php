@@ -18,6 +18,7 @@
                                     <form action="{{route('bodeguero.mantencion_actualizarproductopost',$producto->id_producto)}}" method="POST" enctype="multipart/form-data">
                                         @method('POST')
                                         @csrf
+                                        @include('validated.messages')
                                         <div class="row">
                                                 <div class="col-6 col-lg">
                                                     <div class="mb-3">
@@ -25,12 +26,8 @@
                                                         <input type="text" id="nombre" name="nombre" class="form-control" value="{{$producto->nombre_producto}}">
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label for="elab" class="form-label">Fecha Elaboracion</label>
-                                                        <input type="date" id="elab" name="elab" class="form-control" value="{{$detalle_producto->fecha_elab}}">
-                                                    </div>
-                                                    <div class="mb-3">
                                                         <label for="precio" class="form-label">Precio</label>
-                                                        <input type="number" id="precio" name="precio" class="form-control" value="{{$detalle_producto->precio}}">
+                                                        <input type="number" id="precio" name="precio" class="form-control" value="{{$producto->precio_producto}}">
                                                     </div>
                                                 </div>
                                                 <div class="col-6 col-lg">
@@ -42,10 +39,6 @@
                                                             </option>
                                                             @endforeach
                                                         </select>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="venc" class="form-label">Fecha Vencimiento</label>
-                                                        <input type="date" id="venc" name="venc" class="form-control" value="{{$detalle_producto->fecha_venc}}">
                                                     </div>
                                                 </div>
                                         </div>
@@ -60,6 +53,12 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12 col-lg-2">
+                            <a href="javascript:history.back()" class="btn btn-secondary">Volver</a>
+                        </div>
+                        
                     </div>
                 </div>
             </div>

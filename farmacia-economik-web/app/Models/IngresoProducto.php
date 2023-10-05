@@ -15,15 +15,23 @@ class IngresoProducto extends Model
     public $timestamps = false;
 
     protected $fillable = [ 
-        'cantidad','rut_usuario','id_producto'
+        'fecha','cantidad','rut_usuario','id_producto'
     ];
+    
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+
+        // Establecer el valor del campo 'fecha' como la fecha actual al crear una instancia de la clase
+        $this->attributes['fecha'] = now();
+    }
 
     public function Usuarios():BelongsTo{
         return $this->belongsTo(Usuario::class);
     }
 
     public function Producto():HasMany{
-        return $this->hasMany(Producto::class);
+        return $this->hasMany(Producto::class,'id_producto');
     }
 
 }

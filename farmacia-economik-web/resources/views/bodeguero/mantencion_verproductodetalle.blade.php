@@ -24,11 +24,6 @@
                                                     placeholder="{{$producto->nombre_producto}}" disabled>
                                             </div>
                                             <div class="mb-3">
-                                                <label for="elab" class="form-label">Fecha Elaboracion</label>
-                                                <input type="date" id="elab" name="elab" class="form-control"
-                                                    value="{{$detalle_producto->fecha_elab}}" disabled>
-                                            </div>
-                                            <div class="mb-3">
                                                 <label for="precio" class="form-label">Precio</label>
                                                 <input type="number" id="precio" name="precio" class="form-control"
                                                     placeholder="{{$producto->precio_producto}}" disabled>
@@ -41,19 +36,56 @@
                                                     placeholder="{{$producto->Categoria->nombre}}" disabled>
                                             </div>
                                             <div class="mb-3">
-                                                <label for="venc" class="form-label">Fecha Vencimiento</label>
-                                                <input type="date" id="venc" name="venc" class="form-control"
-                                                    value="{{$detalle_producto->fecha_venc}}" disabled>
+                                                <label for="stockTotal" class="form-label">Stock Actual</label>
+                                                <input type="text" id="stockTotal" name="stockTotal" class="form-control"
+                                                    placeholder="{{$producto->stock_producto}}" disabled>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="mb-3 text-end">
-                                                <button class="btn btn-primary" type="submit">Volver</button>
-                                            </div>
-                                        </div>
-                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row bg-white">
+                        <div class="col-12  py-3 order-last order-lg-first">
+                            <div class="card">
+                                <div class="card-body">
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Fecha Vencimiento</th>
+                                                <th>Fecha Elaboracion</th>
+                                                <th>Stock Ingresado</th>
+                                                <th>Actualizar</th>
+                                                <th>Borrar</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($detalle_producto as $detalle)
+                                            <tr>
+                                                <td>{{ $detalle->fecha_venc }}</td>
+                                                <td>{{ $detalle->fecha_elab }}</td>
+                                                <td>{{ $detalle->stock }}</td>
+                                                <td>
+                                                    <div class="col">
+                                                        <a href="#"
+                                                            class="btn btn-light">
+                                                            <i class="material-symbols-outlined">update</i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="col">
+                                                        <a href="#"
+                                                            class="btn btn-danger">
+                                                            <i class="material-symbols-outlined text-white">delete</i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        @endforeach
+                                    </table>
                                 </div>
                             </div>
                         </div>

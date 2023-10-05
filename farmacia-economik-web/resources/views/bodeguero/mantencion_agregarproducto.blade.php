@@ -20,6 +20,7 @@
                                         enctype="multipart/form-data">
                                         @method('POST')
                                         @csrf
+                                        @include('validated.messages')
                                         <div class="row">
                                             <div class="col-6 col-lg">
                                                 <div class="mb-3">

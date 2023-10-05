@@ -19,6 +19,12 @@ class CategoriasSeeder extends Seeder
             ['nombre' => 'Analgesico'],
             ['nombre' => 'Antiulceroso'],
             ['nombre' => 'Antidepresivo'],
+            ['nombre' => 'Antiinflamatorios'],
+            ['nombre' => 'Antialérgicos'],
+            ['nombre' => 'Antibióticos'],
+            ['nombre' => 'Antidiabéticos'],
+            ['nombre' => 'Antihipertensivos'],
+            ['nombre' => 'Antiácidos'],
         ]);
     }
 }

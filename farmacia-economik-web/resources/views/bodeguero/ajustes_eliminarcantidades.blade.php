@@ -32,12 +32,23 @@
                                             <td>{{ $producto->nombre_producto }}</td>
                                             <td>{{ $producto->stock_producto }}</td>
                                             <td>{{ $producto->Categoria->nombre }}</td>
-                                            <td><div class="col">
-                                                <a href="{{ route('bodeguero.ajustes_eliminarcantidadesproducto', $producto->id_producto) }}"
-                                                    class="btn btn-light">
-                                                    <i class="material-symbols-outlined">delete</i>
-                                                </a>
-                                            </div></td>
+                                            <td>
+                                                @if($producto->stock_producto==0)
+                                                <div class="col">
+                                                    <a href="{{ route('bodeguero.ajustes_eliminarcantidadesproducto', $producto->id_producto) }}"
+                                                        class="btn btn-danger text-white disabled"  aria-disabled="true">
+                                                        <i class="material-symbols-outlined">delete</i>
+                                                    </a>
+                                                </div>
+                                                @else
+                                                <div class="col">
+                                                    <a href="{{ route('bodeguero.ajustes_eliminarcantidadesproducto', $producto->id_producto) }}"
+                                                        class="btn btn-danger text-white">
+                                                        <i class="material-symbols-outlined">delete</i>
+                                                    </a>
+                                                </div>
+                                                @endif
+                                            </td>
                                         </tr>
                                     </tbody>
                                     @endforeach
@@ -50,4 +61,4 @@
         </div>
     </div>
 </div>
-    @endsection
+@endsection
