@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BodegueroController;
+use App\Http\Controllers\AdministradorController;
 use App\Http\Controllers\UsuariosController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
@@ -61,5 +62,18 @@ Route::get('/inicio/ajustes',[BodegueroController::class,'ingreso_listadoingreso
 //INGRESO DE PRODUCTOS
 Route::get('/inicio/agregarmercaderia',[BodegueroController::class,'ingreso_agregarcantidades'])->name('bodeguero.ingreso_agregarcantidades');
 Route::post('/inicio/agregarmercaderia',[BodegueroController::class,'ingreso_agregarcantidadespost'])->name('bodeguero.ingreso_agregarcantidadespost');
+
+//---------ADMINISTRACION DE CUENTAS-------------------------
+//LISTAR CUENTAS
+Route::get('/inicio/cuentas',[AdministradorController::class,'listar_cuentas'])->name('administrador.cuentas_ver');
+//BORRAR CUENTA
+Route::delete('/cuentas/{cuenta}',[AdministradorController::class,'borrar_cuenta'])->name('administrador.borrar_cuenta');
+//EDITAR CUENTA
+Route::get('/cuentas/editar/{rut}',[AdministradorController::class,'editar_cuenta'])->name('administrador.cuenta_editar');
+//ACTUALIZAR CUENTA
+Route::put('/cuentas/actualizar/{rut}',[AdministradorController::class,'actualizar_cuenta'])->name('administrador.actualizar_cuenta');
+
+//---------ADMINISTRACION DE CATEGORIAS-------------------------
+Route::get('/inicio/categorias',[AdministradorController::class,'listar_categorias'])->name('administrador.categorias_ver');
 
 

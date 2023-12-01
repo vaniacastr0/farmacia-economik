@@ -61,11 +61,11 @@
                                     @endif
 
                                     @if(auth()->user()->tipo_usuario === 'V')
-                                    Vendedor {{ auth()->user()->nombre }} {{ auth()->user()->apellido }}
+                                    Vendedor <span class="fw-bold">{{ auth()->user()->nombre }} {{ auth()->user()->apellido }} </span>
                                     @endif
 
                                     @if(auth()->user()->tipo_usuario === 'A')
-                                    Administrador {{ auth()->user()->nombre }} {{auth()->user()->apellido }}
+                                    Administrador <span class="fw-bold">{{ auth()->user()->nombre }} {{auth()->user()->apellido }} </span>
                                     @endif
                                 </div>
                             </div>
@@ -163,7 +163,8 @@
                                 </ul>
                             </div>
                         </li>
-                        @else(auth()->user()->tipo_usuario == 'A')
+                        @endif
+                        @if(auth()->user()->tipo_usuario == 'A')
                         <li class="nav-item">
                             <a class="nav-link text-dark" data-bs-toggle="collapse" href="#gestion_cuentas">
                                 <i class="fas fa-caret-down" style="margin-right: 10px;"></i>Gestion de Cuentas
@@ -171,9 +172,41 @@
                             <div class="collapse" id="gestion_cuentas">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" href="#" style="padding-left: 30px;">
+                                        <a class="nav-link text-dark" href="{{route('administrador.cuentas_ver')}}" style="padding-left: 30px;">
                                             <i class="material-symbols-outlined align-middle fs-4"
                                                 style="margin-right: 10px;">sort</i>Cuentas
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" data-bs-toggle="collapse" href="#gestion_categoria">
+                                <i class="fas fa-caret-down" style="margin-right: 10px;"></i>Gestion de categorias
+                            </a>
+                            <div class="collapse" id="gestion_categoria">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" href="{{route('administrador.categorias_ver')}}" style="padding-left: 30px;">
+                                            <i class="material-symbols-outlined align-middle fs-4"
+                                                style="margin-right: 10px;">category</i>Categorias
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        @endif
+                        @if(auth()->user()->tipo_usuario == 'V')
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" data-bs-toggle="collapse" href="#ventas">
+                                <i class="fas fa-caret-down" style="margin-right: 10px;"></i>Ventas
+                            </a>
+                            <div class="collapse" id="ventas">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" href="#" style="padding-left: 30px;">
+                                            <i class="material-symbols-outlined align-middle fs-4"
+                                                style="margin-right: 10px;">sort</i>Realizar una venta
                                         </a>
                                     </li>
                                 </ul>
