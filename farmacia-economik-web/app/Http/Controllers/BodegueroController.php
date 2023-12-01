@@ -17,7 +17,7 @@ class BodegueroController extends Controller
 {
     //INICIO LOGIN
     public function inicio(){
-        if(Auth::check() && auth()->user()->tipo_usuario === 'B'){
+        if(Auth::check()){
             $numero_filas = Producto::count();
             $stock_actual = Producto::sum('stock_producto');
             $cuentas_activas = Usuario::count();
@@ -29,7 +29,7 @@ class BodegueroController extends Controller
     }
     //PAGINA PRINCIPAL
     public function paginaprincipal(){
-        if(Auth::check() && auth()->user()->tipo_usuario === 'B'){
+        if(Auth::check()){
             $numero_filas = Producto::count();
             $stock_actual = Producto::sum('stock_producto');
             $cuentas_activas = Usuario::count();
