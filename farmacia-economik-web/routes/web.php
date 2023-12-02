@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BodegueroController;
 use App\Http\Controllers\AdministradorController;
 use App\Http\Controllers\UsuariosController;
+use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
@@ -84,6 +85,13 @@ Route::delete('/categorias/{id}',[AdministradorController::class,'categoria_borr
 Route::get('/inicio/clientes',[AdministradorController::class,'clientes_ver'])->name('administrador.clientes_ver');
 //AGREGAR CLIENTE
 Route::get('/inicio/agregar',[AdministradorController::class,'clientes_agregar'])->name('administrador.clientes_agregar');
+Route::put('/inicio/agregar',[ClientesController::class,'clientes_agregar_post'])->name('administrador.clientes_agregar_post');
+//BORRAR CLIENTE
+Route::delete('/inicio/eliminar/{id}',[AdministradorController::class,'clientes_borrar'])->name('administrador.clientes_borrar');
+//ACTUALIZAR CLIENTE
+Route::get('/clientes/editar/{rut}',[AdministradorController::class,'clientes_editar'])->name('administrador.clientes_editar');
+Route::put('/clientes/editar/{rut}',[AdministradorController::class,'cliente_actualizar'])->name('administrador.cliente_actualizar');
+
 
 
 

@@ -31,7 +31,7 @@
                 <a href="{{route('inicio.paginaprincipal')}}" class="btn btn-info">
                     <span class="material-symbols-outlined text-white">store</span>
                 </a>
-                <label class="text-white">GESTION DE INVENTARIO FARMACIA ECONOMIK</label>
+                <label class="text-white">GESTIÓN DE INVENTARIO FARMACIA ECONOMIK</label>
 
             </div>
             <div class="col-auto align-self-center">
@@ -167,7 +167,7 @@
                         @if(auth()->user()->tipo_usuario == 'A')
                         <li class="nav-item">
                             <a class="nav-link text-dark" data-bs-toggle="collapse" href="#gestion_cuentas">
-                                <i class="fas fa-caret-down" style="margin-right: 10px;"></i>Gestion de Cuentas
+                                <i class="fas fa-caret-down" style="margin-right: 10px;"></i>Gestión de Cuentas
                             </a>
                             <div class="collapse" id="gestion_cuentas">
                                 <ul class="nav flex-column">
@@ -182,7 +182,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" data-bs-toggle="collapse" href="#gestion_categoria">
-                                <i class="fas fa-caret-down" style="margin-right: 10px;"></i>Gestion de Categorias
+                                <i class="fas fa-caret-down" style="margin-right: 10px;"></i>Gestión de Categorías
                             </a>
                             <div class="collapse" id="gestion_categoria">
                                 <ul class="nav flex-column">
@@ -197,7 +197,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" data-bs-toggle="collapse" href="#gestion_clientes">
-                                <i class="fas fa-caret-down" style="margin-right: 10px;"></i>Gestion de Clientes
+                                <i class="fas fa-caret-down" style="margin-right: 10px;"></i>Gestión de Clientes
                             </a>
                             <div class="collapse" id="gestion_clientes">
                                 <ul class="nav flex-column">

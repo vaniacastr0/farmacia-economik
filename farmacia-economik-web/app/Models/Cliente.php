@@ -16,7 +16,7 @@ class Cliente extends Model
     public $timestamps = false;
 
     protected $fillable = [ 
-        'nombre','apellido'
+        'rut','nombre','apellido'
     ];
 
     public function Venta():HasMany{
