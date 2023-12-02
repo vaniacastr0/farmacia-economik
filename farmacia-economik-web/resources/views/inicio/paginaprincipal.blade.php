@@ -91,6 +91,27 @@
                     </div>
                 </div>
             </div>
+            <div class="row mt-6"> 
+                <div class="col-lg-6 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="col">
+                                <div class="row">
+                                    <h5 class="card-title text-start pb-2">Ingresos Hechos</h5>
+                                </div>
+                                <div class="row">
+                                    <div class="col-1 px-2">
+                                        <i class="fas fa-clipboard-check fa-2x"></i>
+                                    </div>
+                                    <div class="col-11 text-start">
+                                        <h2>{{$listado_ajustes}}</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>

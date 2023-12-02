@@ -19,7 +19,7 @@
                                 <th>Id</th>
                                 <th>Nombre</th>
                                 <th>Cantidad Productos</th>
-                                <th>Editar</th>
+                                <th>Borrar</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -29,12 +29,21 @@
                                 <td>{{$categoria->nombre}}</td>
                                 <td>{{$categoria->cantidad_productos}}</td>
                                 <td>
+                                    @if ($categoria->cantidad_productos >= 1)
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-light text-white"
-                                            data-bs-toggle="modal" data-bs-target="#borrarCategoria{{$categoria->id_categoria}}">
-                                            <span class="material-symbols-outlined material-icons">edit</span>
+                                        <button type="button" class="btn btn-sm btn-danger text-white"
+                                            data-bs-toggle="modal" data-bs-target="#borrarCategoria{{$categoria->id_categoria}}" disabled>
+                                            <span class="material-symbols-outlined material-icons">delete</span>
                                         </button>
                                     </div>
+                                    @else
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-danger text-white"
+                                            data-bs-toggle="modal" data-bs-target="#borrarCategoria{{$categoria->id_categoria}}">
+                                            <span class="material-symbols-outlined material-icons">delete</span>
+                                        </button>
+                                    </div>
+                                    @endif
                                     <!-- Modal Borrar -->
                                     <div class="modal fade" id="borrarCategoria{{$categoria->id_categoria}}" tabindex="-1"
                                         aria-labelledby="borrarCategoriaLabel{{$categoria->id_categoria}}" aria-hidden="true">
@@ -51,7 +60,7 @@
                                                     @method('delete')
                                                     @csrf
                                                     <div class="modal-body">
-                                                        <span class="text-dark">Se borrarán todos los productos de esta categoría ¿Estás seguro que quieres la categoría
+                                                        <span class="text-dark">No existe producto con esta categoría ¿Estás seguro que quieres la categoría
                                                             </span><span
                                                             class="text-danger fw-bold">{{$categoria->nombre}}</span> <span
                                                             class="text-dark">?</span>
