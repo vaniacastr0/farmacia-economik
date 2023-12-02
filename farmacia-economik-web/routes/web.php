@@ -75,5 +75,6 @@ Route::put('/cuentas/actualizar/{rut}',[AdministradorController::class,'actualiz
 
 //---------ADMINISTRACION DE CATEGORIAS-------------------------
 Route::get('/inicio/categorias',[AdministradorController::class,'listar_categorias'])->name('administrador.categorias_ver');
+Route::delete('/categorias/{id}',[AdministradorController::class,'categoria_borrar'])->name('administrador.categoria_borrar');
 
 

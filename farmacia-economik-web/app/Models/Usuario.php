@@ -25,7 +25,7 @@ class Usuario extends Authenticatable
     ];
 
 
-    public function Ingreso_Productos(){
+    public function IngresoProducto():HasMany{
         return $this->hasMany(IngresoProductos::class, 'rut');
     }
 

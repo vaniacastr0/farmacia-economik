@@ -146,7 +146,7 @@
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
                                         <a class="nav-link text-dark"
-                                            href="#"
+                                            href="{{route('bodeguero.ingreso_listadoingresos')}}"
                                             style="padding-left: 30px;">
                                             <i class="material-symbols-outlined align-middle fs-4"
                                                 style="margin-right: 10px;">sort</i>Listado de ingresos
@@ -182,7 +182,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" data-bs-toggle="collapse" href="#gestion_categoria">
-                                <i class="fas fa-caret-down" style="margin-right: 10px;"></i>Gestion de categorias
+                                <i class="fas fa-caret-down" style="margin-right: 10px;"></i>Gestion de Categorias
                             </a>
                             <div class="collapse" id="gestion_categoria">
                                 <ul class="nav flex-column">

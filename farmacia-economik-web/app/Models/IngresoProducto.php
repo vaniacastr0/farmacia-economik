@@ -26,12 +26,12 @@ class IngresoProducto extends Model
         $this->attributes['fecha'] = now();
     }
 
-    public function Usuarios():BelongsTo{
-        return $this->belongsTo(Usuario::class);
+    public function Usuario(): BelongsTo {
+        return $this->BelongsTo(Usuario::class, 'rut_usuario');
     }
 
-    public function Producto():HasMany{
-        return $this->hasMany(Producto::class,'id_producto');
+    public function Producto():BelongsTo {
+        return $this->BelongsTo (Producto::class,'id_producto');
     }
 
 }
