@@ -4,7 +4,7 @@
 <div class="container p-5">
     <div class="row pb-2">
         <div class="col col-lg-12 d-flex justify-content-center py-4 ">
-            <h1 class="">Edicion de usuario</h1>
+            <h1 class="">Edicion de Usuario</h1>
         </div>
     </div>
     <div class="container">
@@ -48,6 +48,12 @@
                 </form>
             </div>
         </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-12 col-lg-2 px-4">
+            <a href="javascript:history.back()" class="btn btn-secondary">Volver</a>
+        </div>
+        
     </div>
 </div>
 @endsection

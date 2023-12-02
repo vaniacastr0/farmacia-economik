@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\UpdateRequest;
+use App\Http\Requests\ActualizarClienteRequest;
 use App\Models\Usuario;
 use App\Models\Categoria;
 use App\Models\Producto;
@@ -19,7 +20,7 @@ class AdministradorController extends Controller
         if (auth()->check() && auth()) {
             $cuentas_ingresosyventas = DB::table('usuarios')
             ->leftJoin('ingreso_productos', 'usuarios.rut', '=', 'ingreso_productos.rut_usuario')
-            ->leftJoin('ventas', 'usuarios.rut', '=', 'ventas.rut_usuario')  // Agrega esta línea para unir la tabla 'ventas'
+            ->leftJoin('ventas', 'usuarios.rut', '=', 'ventas.rut_usuario')
             ->select(
                 'usuarios.rut',
                 'usuarios.nombre',
@@ -27,7 +28,7 @@ class AdministradorController extends Controller
                 'usuarios.password',
                 'usuarios.tipo_usuario',
                 DB::raw('COUNT(ingreso_productos.rut_usuario) as cantidad_ingresos'),
-                DB::raw('COUNT(ventas.rut_usuario) as cantidad_ventas')  // Nueva columna para contar ventas
+                DB::raw('COUNT(ventas.rut_usuario) as cantidad_ventas') 
             )
             ->groupBy('usuarios.rut', 'usuarios.nombre', 'usuarios.apellido', 'usuarios.password', 'usuarios.tipo_usuario')
             ->get();
@@ -38,10 +39,8 @@ class AdministradorController extends Controller
     }
 
     //BORRAR USUARIOS
-    public function borrar_cuenta(Usuario $cuenta){
-        if ($cuenta->tipo_usuario == 'A') {
-            return redirect()->route('administrador.cuentas')->with('error', 'No se puede eliminar al administrador');
-        }
+    public function borrar_cuenta($cuenta){
+        $cuenta = Usuario::findOrFail($cuenta);
         $cuenta->delete();
         return redirect()->route('administrador.cuentas_ver');
     }
@@ -99,14 +98,67 @@ class AdministradorController extends Controller
 
     //CLIENTES
     public function clientes_ver(){
-        $clientes = Cliente::all();
-        return view('administrador.clientes_ver', compact('clientes'));
+        $clientesConCompras = DB::table('clientes')
+        ->leftJoin('ventas', 'clientes.rut', '=', 'ventas.rut_cliente')
+        ->select(
+            'clientes.rut',
+            'clientes.nombre',
+            'clientes.apellido',
+            DB::raw('COUNT(ventas.rut_cliente) as cantidad_compras')
+        )
+        ->groupBy('clientes.rut', 'clientes.nombre', 'clientes.apellido')
+        ->get();
+        return view('administrador.clientes_ver', compact('clientesConCompras'));
     }
 
     //AGREGAR CLIENTE
     public function clientes_agregar(){
         return view('administrador.clientes_agregar');
     }
+
+    //BORRAR CLIENTE
+    public function clientes_borrar($rut){
+        $cliente = Cliente::findOrFail($rut);
+        $cliente->delete();
+
+        $clientesConCompras = DB::table('clientes')
+        ->leftJoin('ventas', 'clientes.rut', '=', 'ventas.rut_cliente')
+        ->select(
+            'clientes.rut',
+            'clientes.nombre',
+            'clientes.apellido',
+            DB::raw('COUNT(ventas.rut_cliente) as cantidad_compras')
+        )
+        ->groupBy('clientes.rut', 'clientes.nombre', 'clientes.apellido')
+        ->get();
+        return view('administrador.clientes_ver', compact('clientesConCompras'));
+    }
+
+    //ACTUALIZAR CLIENTE
+    public function clientes_editar($rut){
+        $cliente = Cliente::findOrFail($rut);
+        return view('administrador.clientes_editar', compact('cliente'));
+    }
+
+    public function cliente_actualizar(ActualizarClienteRequest $request, $rut){
+        $cliente = Cliente::findOrFail($rut);
+        $cliente->nombre = $request->nombre;
+        $cliente->apellido = $request->apellido;
+        $cliente->save();
+
+        $clientesConCompras = DB::table('clientes')
+        ->leftJoin('ventas', 'clientes.rut', '=', 'ventas.rut_cliente')
+        ->select(
+            'clientes.rut',
+            'clientes.nombre',
+            'clientes.apellido',
+            DB::raw('COUNT(ventas.rut_cliente) as cantidad_compras')
+        )
+        ->groupBy('clientes.rut', 'clientes.nombre', 'clientes.apellido')
+        ->get();
+
+        return redirect()->route('administrador.clientes_ver',compact('clientesConCompras'));
+        }
 
 }
 

@@ -21,6 +21,7 @@
                                 <th>Nombre</th>
                                 <th>Apellido</th>
                                 <th>Ingresos</th>
+                                <th>Ventas</th>
                                 <th>Borrar</th>
                                 <th>Editar</th>
                             </tr>
@@ -45,8 +46,9 @@
                                 <td>{{ $cuenta->nombre }}</td>
                                 <td>{{ $cuenta->apellido }}</td>
                                 <td>{{ $cuenta->cantidad_ingresos}}</td>
+                                <td>{{ $cuenta->cantidad_ventas }}</td>
                                 <td>
-                                    @if($cuenta->cantidad_ingresos >= 1)
+                                    @if($cuenta->cantidad_ingresos >= 1 or $cuenta->cantidad_ventas >=1)
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-sm btn-danger text-white"
                                             data-bs-toggle="modal" data-bs-target="#borrarModal{{$cuenta->rut}}" disabled>
@@ -117,11 +119,11 @@
                                     @if ($cuenta->tipo_usuario === 'A')
                                     <button type="button" class="btn btn-light" data-bs-toggle="modal"
                                         data-bs-target="#EditarModal{{ $cuenta->rut }}">
-                                        <span class="material-symbols-outlined material-icons">edit</span>
+                                        <span class="material-symbols-outlined material-icons text-white">edit</span>
                                     </button>
                                     @elseif ($cuenta->tipo_usuario != 'A')
                                     <a class="btn btn-light" href="{{ route('administrador.cuenta_editar', $cuenta->rut) }}">
-                                        <span class="material-symbols-outlined material-icons">edit</span>
+                                        <span class="material-symbols-outlined material-icons text-white">edit</span>
                                     </a>
                                     @endif
                                     <!-- Modal Edicion -->
