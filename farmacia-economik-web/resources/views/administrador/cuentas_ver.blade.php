@@ -4,11 +4,8 @@
 
 <div class="container p-5">
     <div class="row pb-2">
-        <div class="col-9">
-            <h1 class="">Gestión de cuentas</h1>
-        </div>
-        <div class="col-3">
-            <a href="#" class="btn btn-info">Nueva cuenta(arreglar)</a>
+        <div class="col col-lg-12 d-flex  justify-content-center py-4">
+            <h1 class="">Gestión de Usuarios</h1>
         </div>
     </div>
     <div class="container">
@@ -23,12 +20,13 @@
                                 <th>Rut</th>
                                 <th>Nombre</th>
                                 <th>Apellido</th>
+                                <th>Ingresos</th>
                                 <th>Borrar</th>
                                 <th>Editar</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($cuentas as $cuenta)
+                            @foreach ($cuentas_ingresosyventas as $cuenta)
                             <tr>
                                 @if($cuenta->tipo_usuario =='B')
                                 <td>{{
@@ -46,13 +44,23 @@
                                 <td>{{ $cuenta->rut }}</td>
                                 <td>{{ $cuenta->nombre }}</td>
                                 <td>{{ $cuenta->apellido }}</td>
+                                <td>{{ $cuenta->cantidad_ingresos}}</td>
                                 <td>
+                                    @if($cuenta->cantidad_ingresos >= 1)
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-danger text-white"
+                                            data-bs-toggle="modal" data-bs-target="#borrarModal{{$cuenta->rut}}" disabled>
+                                            <span class="material-symbols-outlined material-icons">delete</span>
+                                        </button>
+                                    </div>
+                                    @else
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-sm btn-danger text-white"
                                             data-bs-toggle="modal" data-bs-target="#borrarModal{{$cuenta->rut}}">
                                             <span class="material-symbols-outlined material-icons">delete</span>
                                         </button>
                                     </div>
+                                    @endif
                                     <!-- Modal Borrar -->
                                     <div class="modal fade" id="borrarModal{{$cuenta->rut}}" tabindex="-1"
                                         aria-labelledby="borrarModalLabel{{$cuenta->rut}}" aria-hidden="true">

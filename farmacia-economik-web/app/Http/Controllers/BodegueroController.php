@@ -271,10 +271,9 @@ class BodegueroController extends Controller
     public function ingreso_listadoingresos(){
         if(Auth::check() && auth()->user()->tipo_usuario === 'B'){
             $productos = Producto::all();
-            $ingresos = IngresoProducto::with('Producto')->get();
+            $ingresos = IngresoProducto::with('Producto','Usuario')->get();
             return view('bodeguero.ingreso_listadoingresos',compact(['ingresos','productos']));
         }
         return view('login.login');
     }
-
 }

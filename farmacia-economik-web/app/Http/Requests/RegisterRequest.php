@@ -35,7 +35,6 @@ class RegisterRequest extends FormRequest
     }
     public function messages():array{
         return [
-
             'tipo_usuario.required' => 'Seleccione el tipo de usuario',
 
             'nombre.required' => 'Ingrese un nombre',
@@ -48,22 +47,16 @@ class RegisterRequest extends FormRequest
             'apellido.min' => 'El apellidodebe tener al menos 3 caracteres',
             'apellido.max' => 'El apellido es demasiado largo',
 
-
-
             'rut.required' => 'Ingrese un rut',
             'rut.min' => 'Ingrese un rut valido',
             'rut.max' => 'Ingrese un rut valido',
             'rut.regex' => 'El rut solo debe contener numeros',
             'rut.unique' => 'El rut ya existe',
             
-            
-
             'password.required'=> 'Ingrese una con contraseña',
             'password.string'=> 'Ingrese una con contraseña solo debe tener letras',
             'password.min'=> 'La contraseña debe tener entre 4 y 20 caracteres',
             'password.max'=> 'La contraseña debe tener entre 4 y 20 caracteres',
-                    
         ];
-
     }
 }

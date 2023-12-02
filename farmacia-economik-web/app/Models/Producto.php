@@ -36,10 +36,10 @@ class Producto extends Model
     }
 
     public function IngresoProducto():BelongsTo{
-        return $this->belongTo(IngresoProducto::class);
+        return $this->belongsTo(IngresoProducto::class,'id_producto');
     }
 
     public function Ajuste():HasMany{
-        return $this->hasMany(Ajuste::class);
+        return $this->hasMany(Ajuste::class,'id_producto');
     }
 }
