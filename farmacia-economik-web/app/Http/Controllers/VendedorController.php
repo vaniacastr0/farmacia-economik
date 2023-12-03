@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Producto;
 use App\Models\Categoria;
 use App\Models\Ajuste;
+use App\Models\Venta;
+use App\Models\Cliente;
 use App\Models\DetalleProducto;
 use App\Models\Usuario;
 use App\Models\IngresoProducto;
@@ -37,5 +39,19 @@ class VendedorController extends Controller
             return view('inicio.paginaprincipal',compact(['numero_filas','stock_actual','cuentas_activas','listado_ajustes']));
         }
         return view('login.login');
+    }
+
+    public function ventas_ver(){
+        $ventas = Venta::all();
+        return view('vendedor.ventas_ver',compact('ventas'));
+    }
+
+    public function ventas_agregar(){
+        $productos_con_stock = Producto::whereIn('id_producto', function ($query) {
+            $query->select('id_producto')->from('detalle_producto');
+        })->get();
+
+        $clientes = Cliente::all();
+        return view('vendedor.ventas_agregar',compact(['productos_con_stock','clientes']));
     }
 }

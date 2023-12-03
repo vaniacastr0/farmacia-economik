@@ -219,9 +219,19 @@
                             <div class="collapse" id="ventas">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" href="#" style="padding-left: 30px;">
+                                        <a class="nav-link text-dark" href="{{route('vendedor.ventas_ver')}}" style="padding-left: 30px;">
                                             <i class="material-symbols-outlined align-middle fs-4"
-                                                style="margin-right: 10px;">sort</i>Realizar una venta
+                                                style="margin-right: 10px;">sort</i>Listado Ventas
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="collapse" id="ventas">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" href="{{route('vendedor.ventar_agregar')}}" style="padding-left: 30px;">
+                                            <i class="material-symbols-outlined align-middle fs-4"
+                                                style="margin-right: 10px;">shopping_cart</i>Realizar una venta
                                         </a>
                                     </li>
                                 </ul>

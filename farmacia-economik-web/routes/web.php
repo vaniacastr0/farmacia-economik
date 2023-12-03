@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BodegueroController;
 use App\Http\Controllers\AdministradorController;
+use App\Http\Controllers\VendedorController;
 use App\Http\Controllers\UsuariosController;
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\RegisterController;
@@ -91,6 +92,13 @@ Route::delete('/inicio/eliminar/{id}',[AdministradorController::class,'clientes_
 //ACTUALIZAR CLIENTE
 Route::get('/clientes/editar/{rut}',[AdministradorController::class,'clientes_editar'])->name('administrador.clientes_editar');
 Route::put('/clientes/editar/{rut}',[AdministradorController::class,'cliente_actualizar'])->name('administrador.cliente_actualizar');
+
+//---------VENDEDOR-------------------------
+//LISTADO DE VENTAS
+Route::get('/inicio/ventas',[VendedorController::class,'ventas_ver'])->name('vendedor.ventas_ver');
+//AGREGAR VENTA
+Route::get('/inicio/venta/agregar',[VendedorController::class,'ventas_agregar'])->name('vendedor.ventar_agregar');
+
 
 
 
