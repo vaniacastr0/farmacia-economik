@@ -1,5 +1,6 @@
 @extends('templates.master')
 @section('contenido-principal')
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet">
 
 <div class="container p-5">
     <div class="row pb-2">
@@ -12,8 +13,15 @@
             <!-- Card 1 -->
             <div class="col-md-6">
                 <div class="card">
-                    <div class="card-body">
-                        <table class="table table-striped table-hover">
+                    <div class="card-header">
+                        <form action="{{ route('vendedor.filtrar_categorias') }}" method="GET" class="d-flex">
+                            <input name="buscarpor" class="form-control me-2" type="search"
+                                placeholder="Buscar producto" aria-label="Search">
+                            <button type="submit" class="btn btn-light">Buscar</button>
+                        </form>
+                    </div>
+                    <div class="card-body ps-0 pr-0">
+                        <table class="table table-striped table-hover" id="tablaOriginal">
                             <thead>
                                 <tr>
                                     <th>ID</th>
@@ -21,21 +29,27 @@
                                     <th>Precio</th>
                                     <th>Stock</th>
                                     <th>Categoría</th>
+                                    <th>Cantidad</th>
                                     <th>Agregar</th>
                                 </tr>
                             <tbody>
-                                @foreach ($productos_con_stock as $producto)
+                                @foreach ($productos_filtrados as $producto)
                                 <tr>
                                     <td>{{$producto->id_producto}}</td>
                                     <td>{{$producto->nombre_producto}}</td>
                                     <td>{{$producto->precio_producto}}</td>
-                                    <td>{{$producto->Categoria->nombre}}</td>
                                     <td>{{$producto->stock_producto}}</td>
+                                    <td>{{$producto->Categoria->nombre}}</td>
                                     <td>
-                                        <a class="btn btn-success" href="#">
-                                            <span
-                                                class="material-symbols-outlined material-icons text-white fs-6">shopping_cart</span>
-                                        </a>
+                                        <div style="max-width: 50px;" class="mb-3">
+                                            <input type="number" class="form-control form-control-sm" id="cantidad"
+                                                name="cantidad" placeholder="0" min="1">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <button type="submit" class="btn btn-success agregarFila">
+                                            <i class="material-icons text-white fs-6">shopping_cart</i>
+                                        </button>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -85,7 +99,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <table class="table table-striped table-hover">
+                        <table class="table table-striped table-hover" id="tablaDestino">
                             <thead>
                                 <tr>
                                     <th>ID</th>
@@ -94,11 +108,24 @@
                                     <th>Cantidad</th>
                                     <th>Total</th>
                                 </tr>
-                            <tbody>
-                                
-                            </tbody>
                             </thead>
+                            <tbody>
+
+                            </tbody>
                         </table>
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-8">
+                                    <div id="totalVenta" class="fw-bold fs-5"> </div>
+                                </div>
+                                <div class="col-4">
+                                    <a class="btn btn-success" href="#">
+                                        <span class="text-white">Finalizar Compra</span>
+                                    </a>
+                                </div>
+                            </div>
+                            
+                        </div>
                     </div>
                 </div>
             </div>
@@ -108,7 +135,57 @@
         <div class="col-12 col-lg-2 px-4">
             <a href="javascript:history.back()" class="btn btn-secondary">Volver</a>
         </div>
-
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+        function calcularTotal() {
+            var total = 0;
+
+            // Itera sobre las filas de la tabla destino y suma los valores de la columna "Total"
+            $("#tablaDestino tbody tr").each(function () {
+                var totalFila = parseFloat($(this).find("td:eq(4)").text());
+                total += totalFila;
+            });
+
+            // Muestra el total en algún lugar de tu vista
+            $("#totalVenta").text("Total Venta: $" + total.toFixed(2));
+        }
+
+        $(".agregarFila").on("click", function () {
+            // Encuentra la fila más cercana en la tabla original
+            var filaOriginal = $(this).closest("tr");
+
+            // Copia los datos de la fila original
+            var id = filaOriginal.find("td:eq(0)").text();
+            var producto = filaOriginal.find("td:eq(1)").text();
+            var precio = parseInt(filaOriginal.find("td:eq(2)").text());
+            var cantidad = parseInt(filaOriginal.find("td:eq(5)").find("input").val());
+
+            var total = precio * cantidad;
+
+            // Crea una nueva fila en la tabla de destino
+            var filaDestino = $("<tr>")
+                .append($("<td>").text(id))
+                .append($("<td>").text(producto))
+                .append($("<td>").text(precio))
+                .append($("<td>").text(cantidad))
+                .append($("<td>").text(total));
+
+            // Agrega la nueva fila a la tabla de destino
+            $("#tablaDestino tbody").append(filaDestino);
+
+            // Desactiva el botón en la tabla original
+            $(this).prop("disabled", true);
+            filaOriginal.find("input[name='cantidad']").prop("disabled", true);
+
+            calcularTotal();
+        });
+        calcularTotal();
+    });
+
+</script>
+
 @endsection

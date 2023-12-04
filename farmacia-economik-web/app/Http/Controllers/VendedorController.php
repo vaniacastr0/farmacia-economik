@@ -47,11 +47,32 @@ class VendedorController extends Controller
     }
 
     public function ventas_agregar(){
-        $productos_con_stock = Producto::whereIn('id_producto', function ($query) {
+        $productos_filtrados = Producto::whereIn('id_producto', function ($query) {
             $query->select('id_producto')->from('detalle_producto');
         })->get();
 
         $clientes = Cliente::all();
-        return view('vendedor.ventas_agregar',compact(['productos_con_stock','clientes']));
+        
+        return view('vendedor.ventas_agregar',compact(['productos_filtrados','clientes',]));
+    }
+
+    public function filtrar_categorias(Request $request){
+        $productos_con_stock = Producto::whereIn('id_producto', function ($query) {
+            $query->select('id_producto')->from('detalle_producto');
+        })->get();
+    
+        $clientes = Cliente::all();
+    
+        $buscarpor = $request->input('buscarpor');
+    
+        $productos_filtrados = Producto::where('nombre_producto', 'like', '%' . $buscarpor . '%')
+            ->whereIn('id_producto', $productos_con_stock->pluck('id_producto'))
+            ->get();
+    
+        return view('vendedor.ventas_agregar', compact(['buscarpor', 'clientes', 'productos_con_stock', 'productos_filtrados']));
+    }
+    
+    public function agregar_producto(Request $request) {
+        $cliente = $request->input('cliente');
     }
 }

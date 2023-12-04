@@ -15,7 +15,7 @@ class Venta extends Model
     public $timestamps = false;
 
     protected $fillable = [ 
-        'fecha','hora','metodo_pago','rut_usuario','rut_cliente'
+        'fecha','hora','metodo_pago','total_venta','rut_usuario','rut_cliente'
     ];
     
     public function __construct(array $attributes = [])

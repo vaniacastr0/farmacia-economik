@@ -98,6 +98,13 @@ Route::put('/clientes/editar/{rut}',[AdministradorController::class,'cliente_act
 Route::get('/inicio/ventas',[VendedorController::class,'ventas_ver'])->name('vendedor.ventas_ver');
 //AGREGAR VENTA
 Route::get('/inicio/venta/agregar',[VendedorController::class,'ventas_agregar'])->name('vendedor.ventar_agregar');
+//FIlTRAR
+Route::get('/filtrar/categorias', [VendedorController::class,'filtrar_categorias'])->name('vendedor.filtrar_categorias');
+//AGREGAR 
+Route::post('/venta/producto', [VendedorController::class,'agregar_producto'])->name('vendedor.agregar_producto');
+
+
+
 
 
 

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->date('fecha');
             $table->time('hora');
             $table->string('metodo_pago', 15);
+            $table->integer('total_venta');
         
             // Claves foráneas
             $table->string('rut_usuario', 10);
