@@ -102,8 +102,8 @@ Route::get('/inicio/venta/agregar',[VendedorController::class,'ventas_agregar'])
 Route::get('/filtrar/categorias', [VendedorController::class,'filtrar_categorias'])->name('vendedor.filtrar_categorias');
 //AGREGAR 
 Route::post('/venta/producto', [VendedorController::class,'agregar_producto'])->name('vendedor.agregar_producto');
-//IMPRIMIR BOLETA
-Route::get('/imprimir-boleta/{idVenta}', [VendedorController::class,'imprimir_boleta'])->name('imprimir.boleta');
+
+Route::get('/imprimir-boleta/{idVenta}', [VendedorController::class,'imprimir_boleta'])->name('imprimir_boleta');
 
 
 

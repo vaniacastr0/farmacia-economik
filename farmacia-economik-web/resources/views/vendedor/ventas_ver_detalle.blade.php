@@ -6,7 +6,7 @@
     <div class="container-fluid d-flex flex-column justify-content-lg-center align-items-center">
         <div class="row">
             <div class="col-12 d-flex justify-content-center py-4">
-                <h3>Detalle de Venta Numero <span class="fw-bold">{{$idVenta}}</span></h3>
+                <h3>Detalle de Venta Numero <span class="fw-bold"></span></h3>
             </div>
         </div>
         <div class="container">
@@ -36,7 +36,7 @@
                                                 <td> {{ $detalle->cantidad }} </td>
                                                 <td>{{ $detalle->total }} </td>
                                                 <td>
-                                                    <a class="btn btn-success" href="#" target="_blank">
+                                                    <a class="btn btn-success" href="{{route('imprimir_boleta',$detalle->id_venta)}}" target="_blank">
                                                         <span class="text-white">Imprimir Boleta</span>
                                                     </a>
                                                 </td>

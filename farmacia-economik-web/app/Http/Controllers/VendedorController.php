@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\IngresoRequest;
 use App\Http\Requests\ActualizacionRequest;
 use Illuminate\Support\Facades\DB;
-use Barryvdh\DomPDF\Facade\Pdf;
+use PDF;
 
 class VendedorController extends Controller
 {
@@ -124,5 +124,13 @@ class VendedorController extends Controller
         ]);
     }
 
-
+    public function imprimir_boleta($id){
+        $venta = Venta::findOrFail($id);
+        $detallesVenta = DB::table('detalle_ventas')
+        ->select('id_venta', 'id_producto', 'precio', 'cantidad','total')
+        ->where('id_venta', $id)
+        ->get();
+        $pdf = Pdf::loadView('vendedor.ventas_boleta', compact('venta', 'detallesVenta'));
+        return $pdf->stream();
+    }
 }
