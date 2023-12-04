@@ -32,7 +32,7 @@ class Producto extends Model
     }
 
     public function VentasInterseccion():BelongsToMany{
-        return $this->belongsToMany(Venta::class)->withPivot(['id_venta','precio','cantidad']);
+        return $this->belongsToMany(Venta::class, 'detalle_ventas','id_producto', 'id_venta')->withPivot(['id_venta','precio','cantidad','total']);
     }
 
     public function IngresoProducto():BelongsTo{

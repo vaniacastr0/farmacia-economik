@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BodegueroController;
 use App\Http\Controllers\AdministradorController;
+use App\Http\Controllers\VendedorController;
 use App\Http\Controllers\UsuariosController;
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\RegisterController;
@@ -91,6 +92,23 @@ Route::delete('/inicio/eliminar/{id}',[AdministradorController::class,'clientes_
 //ACTUALIZAR CLIENTE
 Route::get('/clientes/editar/{rut}',[AdministradorController::class,'clientes_editar'])->name('administrador.clientes_editar');
 Route::put('/clientes/editar/{rut}',[AdministradorController::class,'cliente_actualizar'])->name('administrador.cliente_actualizar');
+
+//---------VENDEDOR-------------------------
+//LISTADO DE VENTAS
+Route::get('/inicio/ventas',[VendedorController::class,'ventas_ver'])->name('vendedor.ventas_ver');
+//AGREGAR VENTA
+Route::get('/inicio/venta/agregar',[VendedorController::class,'ventas_agregar'])->name('vendedor.ventar_agregar');
+//FIlTRAR
+Route::get('/filtrar/categorias', [VendedorController::class,'filtrar_categorias'])->name('vendedor.filtrar_categorias');
+//AGREGAR 
+Route::post('/venta/producto', [VendedorController::class,'agregar_producto'])->name('vendedor.agregar_producto');
+
+Route::get('/imprimir-boleta/{idVenta}', [VendedorController::class,'imprimir_boleta'])->name('imprimir_boleta');
+
+
+
+
+
 
 
 

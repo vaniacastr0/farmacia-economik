@@ -30,7 +30,6 @@
                     <div class="mb-5">
                         <label for="tipo_usuario" class="form-label">Tipo de usuario</label>
                         <select class="form-control" id="tipo_usuario" name="tipo_usuario">
-                            <option>Seleccione una opción</option>
                             @if ($activeAdmi)
                             @if ($usuario->tipo_usuario == 'B')
                             <option selected value="B">Bodeguero</option>
