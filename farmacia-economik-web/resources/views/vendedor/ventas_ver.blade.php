@@ -16,12 +16,13 @@
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>
-                                <th>ID Venta</th>
+                                <th>Venta</th>
                                 <th>Fecha</th>
-                                <th>Metodo Pago</th>
+                                <th>Método Pago</th>
                                 <th>Usuario</th>
                                 <th>Cliente</th>
-                                <th>Detalle</th>
+                                <th>Total</th>
+                                <th>Boleta</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -32,11 +33,11 @@
                                 <td>{{ $venta->metodo_pago }}</td>
                                 <td>{{ $venta->Usuarios->nombre }} {{ $venta->Usuarios->apellido }}</td>
                                 <td>{{ $venta->Cliente->nombre }} {{ $venta->Cliente->apellido }}</td>
+                                <td>${{ $venta->total_venta}}</td>
                                 <td>
                                     <div class="col">
-                                        <a href="#"
-                                            class="btn btn-light " aria-disabled="true">
-                                            <i class="material-symbols-outlined">info</i>
+                                        <a class="btn btn-light" href="{{ route('imprimir_boleta', $venta->id_venta) }}" target="_blank">
+                                            <span class="material-symbols-outlined">download</span>
                                         </a>
                                     </div>
                                 </td>

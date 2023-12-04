@@ -24,7 +24,22 @@
                         <div class="col-12 py-3">
                             <div class="card">
                                 <div class="card-header text-center d-flex justify-content-center">
-                                    <h3 class="mx-auto">------------------------------Detalle de la venta---------------------------</h3>
+                                    <h3 class="mx-auto">------------------------------Detalle de la
+                                        venta---------------------------</h3>
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Fecha</th>
+                                                <th>Hora</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>{{$venta->fecha}}</td>
+                                                <td>{{$venta->hora}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                     <table class="table table-striped table-hover">
                                         <thead>
                                             <tr>
@@ -36,14 +51,16 @@
                                         <tbody>
                                             <tr>
                                                 <td>
-                                                    <div class="row">{{$venta->Usuarios->nombre}} {{$venta->Usuarios->apellido}}</div>
+                                                    <div class="row">{{$venta->Usuarios->nombre}}
+                                                        {{$venta->Usuarios->apellido}}</div>
                                                     <div class="row">{{$venta->rut_usuario}}</div>
                                                 </td>
                                                 <td>
                                                     {{$venta->metodo_pago}}
                                                 </td>
                                                 <td>
-                                                    <div class="row">{{$venta->Cliente->nombre}} {{$venta->Cliente->apellido}}</div>
+                                                    <div class="row">{{$venta->Cliente->nombre}}
+                                                        {{$venta->Cliente->apellido}}</div>
                                                     <div class="row">{{$venta->rut_cliente}}</div>
                                                 </td>
                                             </tr>
@@ -51,6 +68,8 @@
                                     </table>
                                 </div>
                                 <div class="card-body">
+                                    <h3>---------------------------------------------------------------------------------
+                                    </h3>
                                     <table class="table table-striped table-hover">
                                         <thead>
                                             <tr>
@@ -66,7 +85,12 @@
                                             @endphp
                                             @foreach ($detallesVenta as $detalle)
                                             <tr>
-                                                <td>{{ $detalle->id_producto }}</td>
+                                                <td>
+                                                    <?php
+                                                        $nombreProducto = DB::table('productos')->where('id_producto', $detalle->id_producto)->value('nombre_producto');
+                                                    ?>
+                                                    {{ $nombreProducto }}
+                                                </td>
                                                 <td>{{ $detalle->cantidad }}</td>
                                                 <td>${{ $detalle->precio }}</td>
                                                 <td>${{ $detalle->total }}</td>
@@ -75,10 +99,12 @@
                                             $totalPagar += $detalle->total;
                                             @endphp
                                             @endforeach
-                                            <!-- Nueva fila para mostrar el total -->
                                             <tr>
-                                                <td colspan="3" class="fw-bold text-end">Total a pagar:</td>
-                                                <td class="fw-bold">{{ $totalPagar }}</td>
+                                                <td colspan="4"><hr></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3" class="fw-bold text-end">Total a pagar: </td>
+                                                <td class="fw-bold"> ${{ $totalPagar }}</td>
                                             </tr>
                                         </tbody>
                                     </table>

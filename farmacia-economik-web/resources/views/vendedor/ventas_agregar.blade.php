@@ -214,7 +214,6 @@
             // Enviar formulario al controlador
             $("#formularioVenta").submit();
         });
-
         calcularTotal();
     });
 </script>
