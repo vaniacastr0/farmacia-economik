@@ -28,10 +28,10 @@
                             @foreach ($ventas as $venta)
                             <tr>
                                 <td>{{ $venta->id_venta }}</td>
-                                <td>{{ $venta->fecha_venta }}</td>
+                                <td>{{ $venta->fecha }}</td>
                                 <td>{{ $venta->metodo_pago }}</td>
-                                <td>{{ $venta->rut_usuario }}</td>
-                                <td>{{ $venta->rut_cliente }}</td>
+                                <td>{{ $venta->Usuarios->nombre }} {{ $venta->Usuarios->apellido }}</td>
+                                <td>{{ $venta->Cliente->nombre }} {{ $venta->Cliente->apellido }}</td>
                                 <td>
                                     <div class="col">
                                         <a href="#"

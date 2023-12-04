@@ -22,6 +22,8 @@ return new class extends Migration
             // Crear los demás campos de la tabla de intersección
             $table->integer('precio');
             $table->smallInteger('cantidad');
+            $table->integer('total');
+
         
             // Referenciar a ventas y productos
             $table->foreign('id_venta')->references('id_venta')->on('ventas');

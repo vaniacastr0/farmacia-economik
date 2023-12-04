@@ -14,6 +14,8 @@ use App\Models\IngresoProducto;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\IngresoRequest;
 use App\Http\Requests\ActualizacionRequest;
+use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class VendedorController extends Controller
 {
@@ -73,6 +75,54 @@ class VendedorController extends Controller
     }
     
     public function agregar_producto(Request $request) {
-        $cliente = $request->input('cliente');
+        // Obtén todos los datos
+        $data = $request->all();
+        // Accede a los datos específicos
+        $datosTabla = json_decode($data['datosTabla'], true);
+        $cliente = $data['cliente'];
+        $metodoPago = $data['metodoPago'];
+        $vendedor = $data['vendedor'];
+
+        // Crea una nueva instancia de Venta
+        $venta = new Venta();
+        $venta->metodo_pago = $metodoPago;
+        $venta->total_venta = 0; // Inicializa el total de la venta
+        $venta->rut_usuario = $vendedor;
+        $venta->rut_cliente = $cliente;
+
+        // Guarda la venta en la tabla 'venta'
+        $venta->save();
+
+         // Obtén el ID de la venta recién creada
+        $idVenta = $venta->getKey();
+
+        // Itera sobre los datos de la tabla y guarda en la tabla de intersección 'detalle_venta'
+        foreach ($datosTabla as $fila) {
+            $producto = Producto::find($fila['id']);
+
+            // Agrega el producto a la venta y guarda en 'detalle_venta'
+            $venta->ProductosInterseccion()->attach($producto, [
+                'precio' => $fila['precio'],
+                'cantidad' => $fila['cantidad'],
+                'total' => $fila['total'],
+            ]);
+
+            // Actualiza el total de la venta
+            $venta->total_venta += $fila['total'];
+        }
+         // Actualiza la venta con el total final
+        $venta->save();
+
+        $detallesVenta = DB::table('detalle_ventas')
+        ->select('id_venta', 'id_producto', 'precio', 'cantidad','total')
+        ->where('id_venta', $idVenta)
+        ->get();
+        
+        return view ('vendedor.ventas_ver_detalle', [
+            'idVenta' => $idVenta,
+            'detallesVenta' => $detallesVenta,
+        ]);
     }
+
+
 }

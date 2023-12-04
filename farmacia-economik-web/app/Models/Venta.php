@@ -30,11 +30,11 @@ class Venta extends Model
     }
 
     public function Usuarios():BelongsTo{
-        return $this->belongsTo(Usuario::class);
+        return $this->belongsTo(Usuario::class,'rut_usuario');
     } 
 
     public function Cliente():BelongsTo{
-        return $this->belongsTo(Cliente::class);
+        return $this->belongsTo(Cliente::class,'rut_cliente');
     } 
 
     public function Productos():BelongsToMany{
@@ -42,7 +42,7 @@ class Venta extends Model
     }
 
     public function ProductosInterseccion():BelongsToMany{
-        return $this->belongsToMany(Producto::class)->withPivot(['id_producto','precio','cantidad']);
+        return $this->belongsToMany(Producto::class, 'detalle_ventas', 'id_venta', 'id_producto')->withPivot(['id_producto','precio','cantidad','total']);
     }
 
 

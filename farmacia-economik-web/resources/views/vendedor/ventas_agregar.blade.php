@@ -114,17 +114,25 @@
                             </tbody>
                         </table>
                         <div class="card-footer">
-                            <div class="row">
-                                <div class="col-8">
-                                    <div id="totalVenta" class="fw-bold fs-5"> </div>
+                            <form id="formularioVenta"  action="{{ route('vendedor.agregar_producto') }}" method="POST">
+                                @csrf
+                                <!-- Campos ocultos para enviar datos al controlador -->
+                                <input type="hidden" name="datosTabla" id="datosTabla" value="">
+                                <input type="hidden" name="cliente" id="clienteSeleccionado" value="">
+                                <input type="hidden" name="metodoPago" id="metodoPagoSeleccionado" value="">
+                                <input type="hidden" name="vendedor" id="vendedorSeleccionado" value="">
+
+                                <div class="row">
+                                    <div class="col-8">
+                                        <div id="totalVenta" class="fw-bold fs-5"> </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <button type="button" class="btn btn-success" id="FinalizarCompra">
+                                            <span class="text-white">Finalizar Compra</span>
+                                        </button>
+                                    </div>
                                 </div>
-                                <div class="col-4">
-                                    <a class="btn btn-success" href="#">
-                                        <span class="text-white">Finalizar Compra</span>
-                                    </a>
-                                </div>
-                            </div>
-                            
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -140,52 +148,75 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function () {
-
         function calcularTotal() {
             var total = 0;
-
             // Itera sobre las filas de la tabla destino y suma los valores de la columna "Total"
             $("#tablaDestino tbody tr").each(function () {
                 var totalFila = parseFloat($(this).find("td:eq(4)").text());
                 total += totalFila;
             });
-
             // Muestra el total en algún lugar de tu vista
             $("#totalVenta").text("Total Venta: $" + total.toFixed(2));
         }
-
         $(".agregarFila").on("click", function () {
             // Encuentra la fila más cercana en la tabla original
             var filaOriginal = $(this).closest("tr");
-
             // Copia los datos de la fila original
             var id = filaOriginal.find("td:eq(0)").text();
             var producto = filaOriginal.find("td:eq(1)").text();
             var precio = parseInt(filaOriginal.find("td:eq(2)").text());
             var cantidad = parseInt(filaOriginal.find("td:eq(5)").find("input").val());
 
-            var total = precio * cantidad;
+            if (!isNaN(cantidad) && cantidad > 0) {
+                var total = precio * cantidad;
+                // Crea una nueva fila en la tabla de destino
+                var filaDestino = $("<tr>")
+                    .append($("<td>").text(id))
+                    .append($("<td>").text(producto))
+                    .append($("<td>").text(precio))
+                    .append($("<td>").text(cantidad))
+                    .append($("<td>").text(total));
+                // Agrega la nueva fila a la tabla de destino
+                $("#tablaDestino tbody").append(filaDestino);
+                // Desactiva el botón en la tabla original
+                $(this).prop("disabled", true);
+                filaOriginal.find("input[name='cantidad']").prop("disabled", true);
+                calcularTotal();
+            } else {
 
-            // Crea una nueva fila en la tabla de destino
-            var filaDestino = $("<tr>")
-                .append($("<td>").text(id))
-                .append($("<td>").text(producto))
-                .append($("<td>").text(precio))
-                .append($("<td>").text(cantidad))
-                .append($("<td>").text(total));
-
-            // Agrega la nueva fila a la tabla de destino
-            $("#tablaDestino tbody").append(filaDestino);
-
-            // Desactiva el botón en la tabla original
-            $(this).prop("disabled", true);
-            filaOriginal.find("input[name='cantidad']").prop("disabled", true);
-
-            calcularTotal();
+            }
         });
+        $("#FinalizarCompra").on("click", function () {
+            // Obtener datos de la tabla destino
+            var datosTabla = [];
+            $("#tablaDestino tbody tr").each(function () {
+                var fila = {
+                    id: $(this).find("td:eq(0)").text(),
+                    producto: $(this).find("td:eq(1)").text(),
+                    precio: $(this).find("td:eq(2)").text(),
+                    cantidad: $(this).find("td:eq(3)").text(),
+                    total: $(this).find("td:eq(4)").text()
+                };
+                datosTabla.push(fila);
+            });
+
+            // Obtener valores de los combobox
+            var clienteSeleccionado = $("#cliente").val();
+            var metodoPagoSeleccionado = $("#metodo_pago").val();
+            var vendedorSeleccionado = "{{ auth()->user()->rut }}";
+
+            // Actualizar campos ocultos en el formulario
+            $("#datosTabla").val(JSON.stringify(datosTabla));
+            $("#clienteSeleccionado").val(clienteSeleccionado);
+            $("#metodoPagoSeleccionado").val(metodoPagoSeleccionado);
+            $("#vendedorSeleccionado").val(vendedorSeleccionado);
+
+            // Enviar formulario al controlador
+            $("#formularioVenta").submit();
+        });
+
         calcularTotal();
     });
-
 </script>
 
 @endsection
