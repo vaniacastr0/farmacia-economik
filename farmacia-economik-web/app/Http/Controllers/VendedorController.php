@@ -50,7 +50,8 @@ class VendedorController extends Controller
 
     public function ventas_agregar(){
         $productos_filtrados = Producto::whereIn('id_producto', function ($query) {
-            $query->select('id_producto')->from('detalle_producto');
+            $query->select('id_producto')->from('detalle_producto')
+                ->where('stock_producto', '>','0');
         })->get();
 
         $clientes = Cliente::all();

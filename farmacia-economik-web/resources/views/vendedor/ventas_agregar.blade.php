@@ -3,6 +3,9 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet">
 
 <div class="container p-5">
+    <div class="alert alert-danger" id="alert-stock">
+        <strong>Error! </strong> La cantidad ingresada debe ser menor al stock disponible.
+    </div>
     <div class="row pb-2">
         <div class="col col-lg-12 d-flex justify-content-center py-4 ">
             <h1 class="">Proceso de Venta</h1>
@@ -148,6 +151,8 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function () {
+        $("#alert-stock").hide();
+        
         function calcularTotal() {
             var total = 0;
             // Itera sobre las filas de la tabla destino y suma los valores de la columna "Total"
@@ -165,26 +170,35 @@
             var id = filaOriginal.find("td:eq(0)").text();
             var producto = filaOriginal.find("td:eq(1)").text();
             var precio = parseInt(filaOriginal.find("td:eq(2)").text());
+            var stock = parseInt(filaOriginal.find("td:eq(3)").text());
             var cantidad = parseInt(filaOriginal.find("td:eq(5)").find("input").val());
+            
 
-            if (!isNaN(cantidad) && cantidad > 0) {
-                var total = precio * cantidad;
-                // Crea una nueva fila en la tabla de destino
-                var filaDestino = $("<tr>")
-                    .append($("<td>").text(id))
-                    .append($("<td>").text(producto))
-                    .append($("<td>").text(precio))
-                    .append($("<td>").text(cantidad))
-                    .append($("<td>").text(total));
-                // Agrega la nueva fila a la tabla de destino
-                $("#tablaDestino tbody").append(filaDestino);
-                // Desactiva el botón en la tabla original
-                $(this).prop("disabled", true);
-                filaOriginal.find("input[name='cantidad']").prop("disabled", true);
-                calcularTotal();
-            } else {
-
+            if(cantidad > stock){
+                $("#alert-stock").fadeTo(3000, 500).slideUp(500, function() {
+                    $("#alert-stock").slideUp(500);
+                });
+            }else{
+                if (!isNaN(cantidad) && cantidad > 0) {
+                    var total = precio * cantidad;
+                    // Crea una nueva fila en la tabla de destino
+                    var filaDestino = $("<tr>")
+                        .append($("<td>").text(id))
+                        .append($("<td>").text(producto))
+                        .append($("<td>").text(precio))
+                        .append($("<td>").text(cantidad))
+                        .append($("<td>").text(total));
+                    // Agrega la nueva fila a la tabla de destino
+                    $("#tablaDestino tbody").append(filaDestino);
+                    // Desactiva el botón en la tabla original
+                    $(this).prop("disabled", true);
+                    filaOriginal.find("input[name='cantidad']").prop("disabled", true);
+                    calcularTotal();
+                } else {
+                    
+                }
             }
+
         });
         $("#FinalizarCompra").on("click", function () {
             // Obtener datos de la tabla destino
