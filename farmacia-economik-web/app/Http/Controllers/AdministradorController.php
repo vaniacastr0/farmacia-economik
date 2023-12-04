@@ -159,6 +159,5 @@ class AdministradorController extends Controller
 
         return redirect()->route('administrador.clientes_ver',compact('clientesConCompras'));
         }
-
 }
 

@@ -50,7 +50,8 @@ class VendedorController extends Controller
 
     public function ventas_agregar(){
         $productos_filtrados = Producto::whereIn('id_producto', function ($query) {
-            $query->select('id_producto')->from('detalle_producto');
+            $query->select('id_producto')->from('detalle_producto')
+                ->where('stock_producto', '>','0');
         })->get();
 
         $clientes = Cliente::all();
@@ -95,20 +96,30 @@ class VendedorController extends Controller
 
          // Obtén el ID de la venta recién creada
         $idVenta = $venta->getKey();
+        $venta = Venta::findOrFail($idVenta);
 
         // Itera sobre los datos de la tabla y guarda en la tabla de intersección 'detalle_venta'
         foreach ($datosTabla as $fila) {
             $producto = Producto::find($fila['id']);
 
-            // Agrega el producto a la venta y guarda en 'detalle_venta'
-            $venta->ProductosInterseccion()->attach($producto, [
-                'precio' => $fila['precio'],
-                'cantidad' => $fila['cantidad'],
-                'total' => $fila['total'],
-            ]);
-
-            // Actualiza el total de la venta
-            $venta->total_venta += $fila['total'];
+            if ($producto->stock_producto >= $fila['cantidad']) {
+                // Agrega el producto a la venta y guarda en 'detalle_venta'
+                $venta->ProductosInterseccion()->attach($producto, [
+                    'precio' => $fila['precio'],
+                    'cantidad' => $fila['cantidad'],
+                    'total' => $fila['total'],
+                ]);
+    
+                // Actualiza el total de la venta
+                $venta->total_venta += $fila['total'];
+    
+                // Resta el stock del producto
+                $producto->stock_producto -= $fila['cantidad'];
+                $producto->save();
+            } else {
+                // Manejar la situación cuando no hay suficiente stock
+                return response()->json(['error' => 'No hay suficiente stock para el producto ' . $producto->nombre_producto], 400);
+            }
         }
          // Actualiza la venta con el total final
         $venta->save();
@@ -117,10 +128,11 @@ class VendedorController extends Controller
         ->select('id_venta', 'id_producto', 'precio', 'cantidad','total')
         ->where('id_venta', $idVenta)
         ->get();
-        
+
         return view ('vendedor.ventas_ver_detalle', [
             'idVenta' => $idVenta,
             'detallesVenta' => $detallesVenta,
+            'venta' => $venta,
         ]);
     }
 
@@ -133,4 +145,6 @@ class VendedorController extends Controller
         $pdf = Pdf::loadView('vendedor.ventas_boleta', compact('venta', 'detallesVenta'));
         return $pdf->stream();
     }
+
+
 }
