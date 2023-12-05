@@ -26,7 +26,10 @@ class VendedorController extends Controller
             $stock_actual = Producto::sum('stock_producto');
             $cuentas_activas = Usuario::count();
             $listado_ajustes = Ajuste::count();
-            return view('inicio.paginaprincipal',compact(['numero_filas','stock_actual','cuentas_activas','listado_ajustes']));
+            $productosStockCritico = Producto::where('stock_producto', '<=', 20)
+            ->orderBy('stock_producto', 'asc') // Ordena de menor a mayor stock
+            ->get();
+            return view('inicio.paginaprincipal',compact(['numero_filas','stock_actual','cuentas_activas','listado_ajustes','productosStockCritico']));
         }
         return view('login.login');
         
@@ -38,7 +41,10 @@ class VendedorController extends Controller
             $stock_actual = Producto::sum('stock_producto');
             $cuentas_activas = Usuario::count();
             $listado_ajustes = Ajuste::count();
-            return view('inicio.paginaprincipal',compact(['numero_filas','stock_actual','cuentas_activas','listado_ajustes']));
+            $productosStockCritico = Producto::where('stock_producto', '<=', 20)
+            ->orderBy('stock_producto', 'asc') // Ordena de menor a mayor stock
+            ->get();
+            return view('inicio.paginaprincipal',compact(['numero_filas','stock_actual','cuentas_activas','listado_ajustes','productosStockCritico']));
         }
         return view('login.login');
     }

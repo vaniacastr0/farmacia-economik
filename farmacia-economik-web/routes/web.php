@@ -38,6 +38,9 @@ Route::get('inicio/principal',[BodegueroController::class,'paginaprincipal'])->n
 Route::get('/inicio/ver/productos',[BodegueroController::class,'mantencion_verproductos'])->name('bodeguero.mantencion_verproductos');
 Route::post('/inicio/filtrar/producto',[BodegueroController::class,'mantencion_verproductosfiltrados'])->name('bodeguero.mantencion_verproductosfiltrados');
 Route::get('inicio/ver/{id}/producto',[BodegueroController::class,'mantencion_verproductodetalle'])->name('bodeguero.mantencion_verproductodetalle');
+//ACTUALIZAR DETALLE PRODUCTO
+Route::get('/inicio/actualizar/detalle/{id}',[BodegueroController::class,'mantencion_verproductodetalle_actualizar'])->name('bodeguero.mantencion_verproductodetalle_actualizar');
+Route::post('/inicio/actualizar/detalle/{id_detalle}/{id_producto}',[BodegueroController::class,'mantencion_verproductodetalle_actualizar_post'])->name('bodeguero.mantencion_verproductodetalle_actualizar_post');
 //AGREGAR PRODUCTOS
 Route::get('/inicio/agregar/producto',[BodegueroController::class,'agregar_nuevoproducto'])->name('bodeguero.mantencion_agregarproducto');
 Route::post('inicio/agregar/nuevo',[BodegueroController::class,'mantencion_agregarproductopost'])->name('bodeguero.mantencion_agregarproductopost');
