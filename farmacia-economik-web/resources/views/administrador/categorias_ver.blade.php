@@ -3,9 +3,12 @@
 @section('contenido-principal')
 
 <div class="container p-5">
-    <div class="row pb-2">
-        <div class="col col-lg-12 d-flex  justify-content-center py-4">
+    <div class="row py-3">
+        <div class="col-9">
             <h1 class="">Gestión de Categorías</h1>
+        </div>
+        <div class="col-2">
+            <a href="{{route('administrador.categorias_agregar')}}" class="btn btn-info text-white">Agregar Categoría</a>
         </div>
     </div>
     <div class="container">

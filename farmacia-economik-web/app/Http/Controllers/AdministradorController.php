@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\UpdateRequest;
 use App\Http\Requests\ActualizarClienteRequest;
+use App\Http\Requests\AgregarCategoriaRequest;
 use App\Models\Usuario;
 use App\Models\Categoria;
 use App\Models\Producto;
@@ -65,6 +66,30 @@ class AdministradorController extends Controller
 
     //CATEGORIAS
     public function listar_categorias(){
+        $categoriasConCantidad = DB::table('categoria_producto')
+        ->leftJoin('productos', 'categoria_producto.id_categoria', '=', 'productos.id_categoria')
+        ->select(
+            'categoria_producto.id_categoria', 
+            'categoria_producto.nombre', 
+            DB::raw('COUNT(productos.id_producto) as cantidad_productos')
+        )
+        ->groupBy('categoria_producto.id_categoria', 'categoria_producto.nombre')
+        ->orderBy('categoria_producto.nombre', 'asc')  
+        ->get();
+
+        return view('administrador.categorias_ver', compact(['categoriasConCantidad']));
+    }
+
+    //AGREGAR CATEGORIAS
+    public function categorias_agregar(){
+        return view('administrador.categorias_agregar');
+    }
+
+    public function agregar_producto(AgregarCategoriaRequest $request){
+        $nueva_categoria = new Categoria();
+        $nueva_categoria->nombre = $request->input('nombre');
+        $nueva_categoria->save();
+
         $categoriasConCantidad = DB::table('categoria_producto')
             ->leftJoin('productos', 'categoria_producto.id_categoria', '=', 'productos.id_categoria')
             ->select(
