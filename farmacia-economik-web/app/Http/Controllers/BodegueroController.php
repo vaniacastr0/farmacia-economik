@@ -22,7 +22,10 @@ class BodegueroController extends Controller
             $stock_actual = Producto::sum('stock_producto');
             $cuentas_activas = Usuario::count();
             $listado_ajustes = Ajuste::count();
-            return view('inicio.paginaprincipal',compact(['numero_filas','stock_actual','cuentas_activas','listado_ajustes']));
+            $productosStockCritico = Producto::where('stock_producto', '<=', 20)
+            ->orderBy('stock_producto', 'asc') // Ordena de menor a mayor stock
+            ->get();
+            return view('inicio.paginaprincipal',compact(['numero_filas','stock_actual','cuentas_activas','listado_ajustes','productosStockCritico']));
         }
         return view('login.login');
         
@@ -34,7 +37,10 @@ class BodegueroController extends Controller
             $stock_actual = Producto::sum('stock_producto');
             $cuentas_activas = Usuario::count();
             $listado_ajustes = Ajuste::count();
-            return view('inicio.paginaprincipal',compact(['numero_filas','stock_actual','cuentas_activas','listado_ajustes']));
+            $productosStockCritico = Producto::where('stock_producto', '<=', 20)
+            ->orderBy('stock_producto', 'asc') // Ordena de menor a mayor stock
+            ->get();
+            return view('inicio.paginaprincipal',compact(['numero_filas','stock_actual','cuentas_activas','listado_ajustes','productosStockCritico']));
         }
         return view('login.login');
     }
@@ -66,6 +72,7 @@ class BodegueroController extends Controller
         return view('login.login');
     }
 
+    //VER DETALLE DE CADA PRODUCTO
     public function mantencion_verproductodetalle($id){
         if(Auth::check() && auth()->user()->tipo_usuario === 'B'){
             $producto = Producto::find($id);
@@ -77,6 +84,30 @@ class BodegueroController extends Controller
         }
         return view('login.login');
     }
+
+    //ACTUALIZAR DETALLE DE PRODUCTO
+    public function mantencion_verproductodetalle_actualizar($id){
+        $detalle_producto = DetalleProducto::findOrFail($id);
+        return view('bodeguero.mantencion_verproductodetalle_actualizar',compact('detalle_producto'));
+    }
+
+    public function mantencion_verproductodetalle_actualizar_post(Request $request, $id_detalle, $id_producto){
+        $detalle_producto = DetalleProducto::findOrFail($id_detalle);
+        $detalle_producto->fecha_elab = $request->input('elab');
+        $detalle_producto->fecha_venc = $request->input('venc');
+        $detalle_producto->stock = $request->input('cantidad');
+        $detalle_producto->save();
+
+        $producto = Producto::find($id_producto);
+        $detalle_producto = DetalleProducto::where('id_producto','=',$id_producto)->get();
+        $ultima_fecha = DetalleProducto::where('id_producto','=',$id_producto)->orderBy('id_detalle_producto','desc')->first();
+        $categorias = Categoria::all();
+        $productos = Producto::with('Categoria')->get();
+
+        return view('bodeguero.mantencion_verproductodetalle',compact(['producto','detalle_producto','categorias','productos','ultima_fecha']));
+    }
+
+
     //MANTENCION ACTUALIZAR PRODUCTOS
     public function mantencion_actualizarproductoslistado(){
         if(Auth::check() && auth()->user()->tipo_usuario === 'B'){
