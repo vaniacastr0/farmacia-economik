@@ -83,6 +83,9 @@ Route::put('/cuentas/actualizar/{rut}',[AdministradorController::class,'actualiz
 Route::get('/inicio/categorias',[AdministradorController::class,'listar_categorias'])->name('administrador.categorias_ver');
 //BORRAR CATEGORIAS
 Route::delete('/categorias/{id}',[AdministradorController::class,'categoria_borrar'])->name('administrador.categoria_borrar');
+//AGREGAR CATEGORIA
+Route::get('/inicio/categorias/agregar',[AdministradorController::class,'categorias_agregar'])->name('administrador.categorias_agregar');
+Route::put('/inicio/catetgorias/agregar', [AdministradorController::class,'agregar_producto'])->name('administrador.categorias_agregar_post');
 
 //---------ADMINISTRACION DE CLIENTES-------------------------
 //LISTADO DE CLIENTES

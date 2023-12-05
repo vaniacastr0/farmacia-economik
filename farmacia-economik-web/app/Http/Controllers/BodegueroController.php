@@ -154,7 +154,7 @@ class BodegueroController extends Controller
     //MANTENCION AGREGAR PRODUCTO
     public function agregar_nuevoproducto(){
         if(Auth::check() && auth()->user()->tipo_usuario === 'B'){
-            $categorias = Categoria::all();
+            $categorias = Categoria::orderBy('nombre', 'asc')->get();
         return view('bodeguero.mantencion_agregarproducto',compact('categorias'));
         }
         return view('login.login');
