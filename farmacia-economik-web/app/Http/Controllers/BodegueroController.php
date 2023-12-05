@@ -12,6 +12,7 @@ use App\Models\IngresoProducto;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\IngresoRequest;
 use App\Http\Requests\ActualizacionRequest;
+use App\Http\Requests\ActualizarDetalleProductoRequest;
 
 class BodegueroController extends Controller
 {
@@ -91,7 +92,7 @@ class BodegueroController extends Controller
         return view('bodeguero.mantencion_verproductodetalle_actualizar',compact('detalle_producto'));
     }
 
-    public function mantencion_verproductodetalle_actualizar_post(Request $request, $id_detalle, $id_producto){
+    public function mantencion_verproductodetalle_actualizar_post(ActualizarDetalleProductoRequest $request, $id_detalle, $id_producto){
         $detalle_producto = DetalleProducto::findOrFail($id_detalle);
         $detalle_producto->fecha_elab = $request->input('elab');
         $detalle_producto->fecha_venc = $request->input('venc');

@@ -110,6 +110,7 @@
                                     <th>Precio</th>
                                     <th>Cantidad</th>
                                     <th>Total</th>
+                                    <th>Quitar</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -187,18 +188,41 @@
                         .append($("<td>").text(producto))
                         .append($("<td>").text(precio))
                         .append($("<td>").text(cantidad))
-                        .append($("<td>").text(total));
+                        .append($("<td>").text(total))
+                        .append($("<td>").html("<button class='btn btn-danger btn-sm text-white btnEliminar'><i class='material-icons'>delete</i></button>"));
                     // Agrega la nueva fila a la tabla de destino
+                    
                     $("#tablaDestino tbody").append(filaDestino);
                     // Desactiva el botón en la tabla original
                     $(this).prop("disabled", true);
                     filaOriginal.find("input[name='cantidad']").prop("disabled", true);
+
                     calcularTotal();
                 } else {
                     
                 }
-            }
+                $(document).on("click", ".btnEliminar", function() {
+                    var idProductoEliminado = $(this).closest("tr").find("td:eq(0)").text();
 
+                    $("#tablaDestino tbody tr").each(function () {
+                        if ($(this).find("td:eq(0)").text() === idProductoEliminado) {
+                            $(this).remove();
+                            calcularTotal();
+
+                            $("#tablaOriginal tbody tr").each(function () {
+                                if ($(this).find("td:eq(0)").text() === idProductoEliminado) {
+                                    $(this).find("input[name='cantidad']").prop("disabled", false);
+                                    $(this).find("input[name='cantidad']").val('');
+                                    $(this).find(".agregarFila").prop("disabled", false);
+                                    return false; // Sale del bucle cuando encuentra el producto
+                                }
+                            });
+
+                            return false; 
+                        }
+                    });
+                });
+            }
         });
         $("#FinalizarCompra").on("click", function () {
             // Obtener datos de la tabla destino

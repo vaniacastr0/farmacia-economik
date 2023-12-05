@@ -22,6 +22,7 @@
                                 <form action="{{route('bodeguero.mantencion_verproductodetalle_actualizar_post',[$detalle_producto->id_detalle_producto,$detalle_producto->id_producto])}}" method="POST" enctype="multipart/form-data">
                                     @method('POST')
                                     @csrf
+                                    @include('validated.messages')
                                     <div class="row">
                                         <div class="col-12 col-lg">
                                             <div class="col-12 col-lg">

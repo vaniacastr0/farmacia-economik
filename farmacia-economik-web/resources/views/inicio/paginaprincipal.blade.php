@@ -130,7 +130,9 @@
                                         <td>{{ $productos->nombre_producto}}</td>
                                         <td>{{ $productos->Categoria->nombre}}</td>
                                         <td>{{ $productos->precio_producto}}</td>
-                                        <td>{{ $productos->stock_producto}}</td>
+                                        <td class="{{ $productos->stock_producto == 0 ? 'text-danger' : ($productos->stock_producto > 0 && $productos->stock_producto <= 10 ? 'text-warning' : ($productos->stock_producto > 10 && $productos->stock_producto <= 20 ? 'text-success' : '')) }}">
+                                            {{ $productos->stock_producto }}
+                                        </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
